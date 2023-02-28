@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 const connectDB = require("./config/connectDB");
+const Stock = require("./models/stockModel");
+const stockRoutes = require("./routes/stockRoutes");
 
 const app = express();
 
@@ -9,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(stockRoutes);
 
 const PORT = process.env.PORT || 3001;
 
