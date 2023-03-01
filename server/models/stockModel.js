@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
+const User = require("./userModel");
 mongoose.set("strictQuery", false);
-require("mongoose-type-url");
 
 const stocksSchema = mongoose.Schema(
   {
@@ -28,7 +28,23 @@ const stocksSchema = mongoose.Schema(
       type: String,
       required: [true, "add a product image!"],
     },
+    created_by: {
+      user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: User,
+      },
+      user_name: {
+        type: String,
+        required: true,
+      },
+      store_name: {
+        type: String,
+        required: true,
+      },
+    },
   },
+
   {
     timestamps: true,
   }
