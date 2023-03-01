@@ -2,6 +2,13 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 const connectDB = require("./config/connectDB");
+const cookieParser = require("cookie-parser");
+
+// imports for user
+const User = require("./models/userModel");
+const userRoutes = require("./routes/userRoutes");
+
+// imports for stock
 const Stock = require("./models/stockModel");
 const stockRoutes = require("./routes/stockRoutes");
 
@@ -10,8 +17,10 @@ const app = express();
 // MIDDLE WARES
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(cors());
 app.use(stockRoutes);
+app.use(userRoutes);
 
 const PORT = process.env.PORT || 3001;
 

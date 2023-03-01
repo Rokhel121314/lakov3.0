@@ -1,12 +1,36 @@
 const Stocks = require("../models/stockModel");
+const User = require("../models/userModel");
 
 // ADDING/CREATING PRODUCT TO DATABASE
 
 const createProduct = async (req, res) => {
   try {
-    const product = await Stocks.create(req.body);
-    res.status(200).json(product);
-    console.log("product added", product);
+    const {
+      product_name,
+      product_quantity,
+      original_price,
+      selling_price,
+      product_type,
+      product_image,
+    } = req.body;
+    const { user_id } = req.params;
+    User.findById(user_id).then(async (user) => {
+      const product = await Stocks.create({
+        product_name: product_name,
+        product_quantity: product_quantity,
+        original_price: original_price,
+        selling_price: selling_price,
+        product_type: product_type,
+        product_image: product_image,
+        created_by: {
+          user_id: user._id,
+          user_name: user.user_name,
+          store_name: user.store_name,
+        },
+      });
+      res.status(200).json(product);
+      console.log("product added", product);
+    });
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
@@ -15,9 +39,10 @@ const createProduct = async (req, res) => {
 // GETTING ALL PRODUCT FROM DATABASE
 const readAllProduct = async (req, res) => {
   try {
-    const product = await Stocks.find();
+    const { user_id } = req.params;
+    const product = await Stocks.find({ "created_by.user_id": user_id });
     res.status(200).json(product);
-    console.log("products", product);
+    console.log("product", product);
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
@@ -26,11 +51,15 @@ const readAllProduct = async (req, res) => {
 // GETTING PRODUCT BY ID FROM DATABASE
 const readProductById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Stocks.findById(id);
-
+    const { user_id, product_id } = req.params;
+    const product = await Stocks.findOne({
+      "created_by.user_id": user_id,
+      _id: product_id,
+    });
     if (!product) {
-      return res.status(404).json(`No product with id: ${id}`);
+      return res
+        .status(400)
+        .json(`PRODUCT WITH ID ${product_id} DOES NOT EXIST`);
     } else {
       res.status(200).json(product);
       console.log("product", product);
@@ -43,13 +72,17 @@ const readProductById = async (req, res) => {
 // UPDATE PRODUCT BY ID ON DATABASE
 const updateProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Stocks.findByIdAndUpdate({ _id: id }, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const { user_id, product_id } = req.params;
+    const product = await Stocks.findOneAndUpdate(
+      { "created_by.user_id": user_id, _id: product_id },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
     if (!product) {
-      return res.status(404).json(`No product with id: ${id}`);
+      return res.status(404).json(`No product with id: ${product_id}`);
     } else {
       res.status(200).json(product);
       console.log("updated product", product);
@@ -62,10 +95,13 @@ const updateProduct = async (req, res) => {
 // DELETE PRODUCT BY ID
 const deleteProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Stocks.findByIdAndDelete(id);
+    const { user_id, product_id } = req.params;
+    const product = await Stocks.findOneAndRemove({
+      "created_by.user_id": user_id,
+      _id: product_id,
+    });
     if (!product) {
-      return res.status(404).json(`No product with id: ${id}`);
+      return res.status(404).json(`No product with id: ${product_id}`);
     } else {
       res.status(200).json(product);
       console.log("deleted", product);
