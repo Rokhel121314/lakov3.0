@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&display=swap");
+/* font-family: 'Kantumruy Pro', sans-serif; */
+
+@import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&family=Playfair+Display:wght@800&display=swap");
+/* font-family: 'Playfair Display', serif; */
+
+body {
+  margin: 0;
+  color: white;
+}
+
+.login-container {
+  height: 100vh;
+  width: 100%;
+  background-image: url("../../assests/images/backgroundimageoption3.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-position: 0 -140px; */
+  display: flex;
+  /* background-color: aquamarine; */
+}
+
+.login-content {
+  height: 100vh;
+  width: 60%;
+}
+
+.login-content-header {
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+}
+
+.login-content-header > img {
+  height: 8vh;
+}
+
+.login-content-section {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Kantumruy Pro", sans-serif;
+}
+
+.login-slogan {
+  width: 90%;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-shadow: 5px 5px 10px rgb(7, 7, 7);
+}
+
+.login-subtext {
+  width: 90%;
+  font-size: 1.2rem;
+  text-shadow: 5px 5px 10px rgb(7, 7, 7);
+}
+
+.form-link {
+  color: white;
+}
+
+/* LOG IN FORM CSS */
+.login-form {
+  height: 100vh;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  height: 90vh;
+  width: 90%;
+  border: 2px solid white;
+  background: rgba(211, 208, 208, 0.6);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 5px 5px 10px rgb(7, 7, 7);
+}
+
+.form-header {
+  height: 15vh;
+  font-size: 2.5rem;
+}
+.form-subcontainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-inputcontainer {
+  height: 7vh;
+  width: 75%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.form-inputfield {
+  height: 6vh;
+  width: 95%;
+  border-radius: 10px;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+}
+
+.login-status-fail {
+  width: 75%;
+  color: #ff2200;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-shadow: 5px 5px 10px rgb(255, 255, 255);
+}
+
+.login-status-success {
+  width: 75%;
+  color: rgb(7, 255, 44);
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-shadow: 5px 5px 10px rgb(255, 255, 255);
+}
+
+.form-button {
+  height: 6vh;
+  width: 100%;
+  border-radius: 10px;
+  background: #39c643;
+  border: none;
+  color: white;
+  letter-spacing: 2px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.form-button:hover {
+  cursor: pointer;
+  background: #085429;
+  box-shadow: 5px 5px 5px rgba(223, 223, 223, 0.2);
+}
+
+.form-footer {
+  text-shadow: 5px 5px 10px rgb(7, 7, 7);
+}
+/* END OF LOG IN FORM CSS  */
+
+/* REGISTRATION FORM CSS */
+.register-form {
+  height: 100vh;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-container {
+  height: 90vh;
+  width: 90%;
+  border: 2px solid white;
+  background: rgba(129, 128, 128, 0.2);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 5px 5px 10px rgb(7, 7, 7);
+}
+
+.register-header {
+  height: 15vh;
+  font-size: 2.5rem;
+}
+.register-subcontainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-inputcontainer {
+  height: 10vh;
+  width: 75%;
+  display: flex;
+  justify-content: center;
+}
+
+.register-inputfield {
+  height: 6vh;
+  width: 95%;
+  border-radius: 10px;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+}
+
+.register-button {
+  height: 6vh;
+  width: 100%;
+  border-radius: 10px;
+  background: #39c643;
+  border: none;
+  color: white;
+  letter-spacing: 2px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.register-button:hover {
+  cursor: pointer;
+  background: #085429;
+  box-shadow: 5px 5px 5px rgba(223, 223, 223, 0.2);
+}
+
+.register-footer {
+  text-shadow: 5px 5px 10px rgb(7, 7, 7);
+}

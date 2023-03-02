@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&display=swap");
+/* font-family: 'Kantumruy Pro', sans-serif; */
+
+@import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&family=Playfair+Display:wght@800&display=swap");
+/* font-family: 'Playfair Display', serif; */
+
+/* rgb(8,84,41) */
+/* #085429 */
+
+/* #39C643 */
+/* rgb(57,198,67) */
+
+/* FFFFFF */
+/* rgb(255,255,255) */
+
+body {
+  margin: 0;
+}
+
+.nav-container {
+  height: 10vh;
+  width: 100%;
+  background: #085429;
+  background-image: url("../../assests/images/backgroundimageoption3.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0.125rem 0.25rem rgba(245, 206, 206, 0.5);
+}
+
+.nav-brand {
+  margin-left: 6rem;
+  text-decoration: none;
+  color: white;
+  font-family: "Kantumruy Pro", sans-serif;
+}
+
+.nav-logo {
+  height: 8vh;
+}
+
+.nav-items {
+  display: flex;
+  margin-right: 6rem;
+}
+
+.nav-link {
+  margin-left: 4rem;
+  text-decoration: none;
+  color: white;
+  letter-spacing: 0.2rem;
+  font-weight: 600;
+  font-family: "Kantumruy Pro", sans-serif;
+}

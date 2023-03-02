@@ -1,41 +1,69 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./routes/Root";
-import ErrorPage from "./routes/ErrorPage";
-import Home from "./pages/homepage/Home";
+import Root from "./routes/featureroutes/Root";
+import ErrorPage from "./routes/featureroutes/ErrorPage";
+import Home from "./pages/landingpage/Home";
 import Stock from "./pages/stocks/Stock";
 import Pos from "./pages/pos/Pos";
 import Transaction from "./pages/transactions/Transaction";
 import Sales from "./pages/sales/Sales";
+import Layout from "./routes/landingroutes/Layout";
+import Register from "./pages/user/Register";
+import Login from "./pages/user/Login";
+import Feature from "./pages/landingpage/Feature";
+import HowToUse from "./pages/landingpage/HowToUse";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/lako",
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/stocks",
+        path: "/lako/stocks",
         element: <Stock />,
       },
       {
-        path: "/pos",
+        path: "/lako/pos",
         element: <Pos />,
       },
       {
-        path: "/transactions",
+        path: "/lako/transactions",
         element: <Transaction />,
       },
       {
-        path: "/sales",
+        path: "/lako/sales",
         element: <Sales />,
       },
     ],
   },
   {
-    path: "/home",
-    element: <Home />,
+    path: "/",
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/features",
+        element: <Feature />,
+      },
+      {
+        path: "/howtouse",
+        element: <HowToUse />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 

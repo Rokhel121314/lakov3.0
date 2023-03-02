@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const { createToken } = require("../jwt/jtw");
 
+// MIDDLE WARES
+
 // REGISTER USER
 const registerUser = async (req, res) => {
   try {
@@ -27,20 +29,21 @@ const userLogin = async (req, res) => {
   const { user_name, user_password } = req.body;
 
   const user = await User.findOne({ user_name: user_name }).exec();
-  if (!user) res.status(400).json({ error: "USER DOES NOT EXIST" });
+  if (!user) res.status(400).json({ status: "not user" });
   else {
     const hash = user.user_password;
     bcrypt.compare(user_password, hash).then((match) => {
       if (!match) {
-        res.status(400).json({ error: "WRONG PASSWORD!" });
+        res.status(400).json({ status: "wrong password" });
       } else {
         const accessToken = createToken(user);
         res.cookie("access-token", accessToken, {
           expiresIn: 60 * 60 * 24 * 1000,
           httpOnly: true,
         });
+
+        res.json({ isLoggedIn: true, accessToken, user });
       }
-      res.json("LOGGGED IN SUCCESSFULLY");
     });
   }
 };
@@ -48,7 +51,7 @@ const userLogin = async (req, res) => {
 //CHECKING USER IF AUTHENTICATED
 const isAuthenticated = (req, res) => {
   try {
-    res.json("USER IS AUTHENTICATED");
+    res.json({ isAuth: true });
   } catch (error) {
     res.json("USER IS NOT AUTHENTICATED");
   }
