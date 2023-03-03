@@ -5,7 +5,7 @@ const {
   userLogin,
   isAuthenticated,
 } = require("../controllers/userController");
-const { validateToken } = require("../jwt/jtw");
+const { validateToken } = require("../jwt/jwt");
 
 const router = express.Router();
 

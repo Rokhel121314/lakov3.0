@@ -1,58 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./user.module.css";
-import { Link, useNavigate } from "react-router-dom";
-import Axios from "axios";
+import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
 
 function Login() {
-  const navigate = useNavigate();
-  const [status, setStatus] = useState("");
-  const [user, setUser] = useState({ user_name: "", user_password: "" });
-  const [userData, setUserData] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // console.log("user", user);
-  // console.log("userData", userData);
-  console.log("isLoggedIn", isLoggedIn);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    try {
-      Axios.post("http://localhost:3001/users/login", user)
-        .then((response) => {
-          setUserData(response.data.user);
-          setIsLoggedIn(response.data.isLoggedIn);
-          localStorage.setItem("access-token", response.data.accessToken);
-          setStatus("LOGGED IN SUCCESSFULLY");
-          isAuth();
-          setTimeout(() => {
-            navigate("/lako");
-          }, 1000);
-        })
-        .catch((error) => {
-          const status = error.response.data.status;
-          if (status === "not user") {
-            setStatus("USER DOES NOT EXIST");
-          } else if (status === "wrong password") {
-            setStatus("WRONG PASSWORD");
-          }
-        });
-    } catch (error) {
-      console.log("error", error.message);
-    }
-  };
-
-  const isAuth = () => {
-    Axios.get("http://localhost:3001/users/profile")
-      .then((response) => {
-        console.log("authj", response);
-      })
-      .catch((error) => console.log("error", error));
-  };
+  const { handleChange, handleLogin, status, user } = useLogin();
 
   return (
     <div className={styles["login-container"]}>

@@ -1,6 +1,13 @@
 const { sign, verify } = require("jsonwebtoken");
 const { validate } = require("../models/userModel");
 
+const express = require("express");
+const cookieParser = require("cookie-parser");
+
+const app = express();
+// MIDDLE WARES
+app.use(cookieParser());
+
 const SECRET = process.env.SECRETE_JWT;
 
 const createToken = (user) => {
@@ -27,7 +34,7 @@ const validateToken = (req, res, next) => {
         return next();
       }
     } catch (error) {
-      return res.status(500).json({ msg: error.message });
+      return res.status(401).json({ msg: "INVALID TOKEN" });
     }
   }
 };
