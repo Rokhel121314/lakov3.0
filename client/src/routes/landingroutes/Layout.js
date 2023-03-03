@@ -1,8 +1,12 @@
 import React from "react";
 import styles from "./layout.module.css";
 import { Outlet, NavLink } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
+import LoginBtn from "../../components/LoginBtn";
+import LogoutBtn from "../../components/LogoutBtn";
 
 function Layout() {
+  const { userData, handleLogout } = useLogin();
   return (
     <>
       <div className={styles["nav-container"]}>
@@ -24,7 +28,11 @@ function Layout() {
             HOW TO USE
           </NavLink>
           <NavLink to={"/login"} className={styles["nav-link"]}>
-            LOG IN
+            {!userData ? (
+              <LoginBtn />
+            ) : (
+              <LogoutBtn userData={userData} handleLogout={handleLogout} />
+            )}
           </NavLink>
         </div>
       </div>

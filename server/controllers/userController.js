@@ -52,7 +52,7 @@ const userLogin = async (req, res) => {
           isLoggedIn: true,
           user: {
             user_id: user._id,
-            user_name: user.user_name,
+            first_name: user.first_name,
             store_name: user.store_name,
           },
         });
@@ -63,13 +63,25 @@ const userLogin = async (req, res) => {
   }
 };
 
+// USER LOG OUT FUNCTION
+const userLogout = (req, res) => {
+  try {
+    res.cookie("access-token", "1", {
+      expiresIn: 1 * 1 * 1 * 1000,
+    });
+    res.status(200).json("LOGGED OUT");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //CHECKING USER IF AUTHENTICATED
 const isAuthenticated = (req, res) => {
   try {
     res.json({ isAuth: true });
   } catch (error) {
-    res.json("USER IS NOT AUTHENTICATED");
+    res.json({ isAuth: false });
   }
 };
 
-module.exports = { registerUser, isAuthenticated, userLogin };
+module.exports = { registerUser, isAuthenticated, userLogin, userLogout };

@@ -15,9 +15,7 @@ body {
   background-image: url("../../assests/images/backgroundimageoption3.png");
   background-size: cover;
   background-repeat: no-repeat;
-  /* background-position: 0 -140px; */
   display: flex;
-  /* background-color: aquamarine; */
 }
 
 .login-content {

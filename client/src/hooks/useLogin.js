@@ -1,18 +1,14 @@
 import Axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const { isAuth } = require("./authenticate");
 
 function useLogin() {
-  const navigate = useNavigate();
   const [status, setStatus] = useState("");
   const [user, setUser] = useState({ user_name: "", user_password: "" });
-  const [userData, setUserData] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // console.log("user", user);
-  console.log("userData", userData);
-  console.log("isLoggedIn", isLoggedIn);
+  const userData = JSON.parse(localStorage.getItem("userData"));
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,14 +23,9 @@ function useLogin() {
         withCredentials: true,
       })
         .then((response) => {
-          setUserData(response.data.user);
-          setIsLoggedIn(response.data.isLoggedIn);
-          console.log("token", response.data.accessToken);
           setStatus("LOGGED IN SUCCESSFULLY");
-          isAuth();
-          setTimeout(() => {
-            navigate("/lako");
-          }, 1000);
+          localStorage.setItem("userData", JSON.stringify(response.data.user));
+          navigate("/lako/stocks");
         })
         .catch((error) => {
           const status = error.response.data.status;
@@ -49,12 +40,28 @@ function useLogin() {
     }
   };
 
+  // USER LOG OUT FUNCTION
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await Axios.get("http://localhost:3001/users/logout", {
+        withCredentials: true,
+      });
+      setStatus("LOGGED OUT");
+      localStorage.removeItem("userData");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return {
     handleChange,
     handleLogin,
-    isAuth,
+    handleLogout,
     status,
-    isLoggedIn,
     userData,
     user,
   };

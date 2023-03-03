@@ -4,6 +4,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&family=Playfair+Display:wght@800&display=swap");
 /* font-family: 'Playfair Display', serif; */
 
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@800&display=swap");
+
+/* font-family: 'Red Hat Display', sans-serif; */
+
 /* rgb(8,84,41) */
 /* #085429 */
 
@@ -20,8 +24,8 @@ body {
 .nav-container {
   height: 10vh;
   width: 100%;
-  background: #085429;
-  background-image: url("../../assests/images/backgroundimageoption3.png");
+  background: #000000;
+  /* background-image: url("../../assests/images/backgroundimageoption3.png"); */
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
@@ -36,7 +40,7 @@ body {
   margin-left: 6rem;
   text-decoration: none;
   color: white;
-  font-family: "Kantumruy Pro", sans-serif;
+  font-family: "Red Hat Display", sans-serif;
 }
 
 .nav-logo {
@@ -51,8 +55,71 @@ body {
 .nav-link {
   margin-left: 4rem;
   text-decoration: none;
-  color: white;
+  color: rgb(255, 255, 255);
   letter-spacing: 0.2rem;
   font-weight: 600;
-  font-family: "Kantumruy Pro", sans-serif;
+  font-family: "Red Hat Display", sans-serif;
+  text-shadow: 5px 5px 10px rgb(111, 108, 108);
+  display: flex;
+  align-items: center;
+}
+
+/* LOGIN BTN CSS */
+
+.login-btn {
+  padding: 0.5rem 1.5rem;
+  background: #39c643;
+  color: white;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  font-family: "Red Hat Display", sans-serif;
+  text-shadow: 5px 5px 10px rgb(0, 0, 0);
+  transition: background-color 1s;
+  transition: color 0.5s;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+  background: #ffffff;
+  color: #39c643;
+  text-shadow: 5px 5px 10px#39c643;
+}
+
+.login-btn:focus,
+.login-btn:active {
+  background-color: black;
+  transition: none;
+}
+
+.logout-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.first-name {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  color: #39c643;
+}
+
+.user-icon {
+  font-size: 2rem;
+  color: #39c643;
+}
+
+.drop-down-container {
+  position: absolute;
+  top: 6vh;
+  right: 0;
+  min-height: 20vh;
+  width: 150px;
+  z-index: 11;
+  background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }

@@ -1,4 +1,4 @@
-const { sign, verify } = require("jsonwebtoken");
+const { sign, verify, decode } = require("jsonwebtoken");
 const { validate } = require("../models/userModel");
 
 const express = require("express");
@@ -31,6 +31,7 @@ const validateToken = (req, res, next) => {
       const validToken = verify(accessToken, SECRET);
       if (validToken) {
         req.authenticated = true;
+
         return next();
       }
     } catch (error) {

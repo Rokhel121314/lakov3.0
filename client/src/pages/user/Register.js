@@ -1,45 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./user.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import Axios from "axios";
+import useRegister from "../../hooks/useRegister";
+import useLogin from "../../hooks/useLogin";
 
 function Register() {
+  const { formData, handleChange, handleSubmit } = useRegister();
+  const { userData } = useLogin();
+
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    store_name: "",
-    user_name: "",
-    user_password: "",
-  });
-  // console.log("formData", formData);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await Axios.post("http://localhost:3001/users", formData);
-      console.log("USER REGISTERED");
-
-      setFormData({
-        ...formData,
-        first_name: "",
-        last_name: "",
-        store_name: "",
-        user_name: "",
-        user_password: "",
-      });
-
-      navigate("/login");
-    } catch (error) {
-      console.log("error", error.message);
-    }
-  };
+  useEffect(() => {
+    if (userData) {
+      navigate("/");
+    } else return;
+  }, [userData, navigate]);
 
   return (
     <div className={styles["login-container"]}>

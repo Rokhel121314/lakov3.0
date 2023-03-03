@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./root.module.css";
 import { NavLink, Outlet } from "react-router-dom";
+import ProtectedRoute from "../../hooks/ProtectedRoute";
+import useLogin from "../../hooks/useLogin";
 
 function Root() {
+  const { handleLogout, userData } = useLogin();
   return (
     <>
       <div className={styles["root-container"]}>
@@ -56,9 +59,15 @@ function Root() {
             <div className={styles["nav-item"]}>SALES</div>
           </NavLink>
         </nav>
+        <div>
+          <button onClick={handleLogout}>LOG OUT</button>
+          <div>{userData?.user_name}</div>
+        </div>
       </div>
       <div id="root">
-        <Outlet />
+        <ProtectedRoute userData={userData}>
+          <Outlet />
+        </ProtectedRoute>
       </div>
     </>
   );

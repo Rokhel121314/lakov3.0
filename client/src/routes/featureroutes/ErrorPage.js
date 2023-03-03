@@ -1,7 +1,7 @@
 import React from "react";
 
 function ErrorPage() {
-  return <div>Lako ErrorPage</div>;
+  return <div style={{ color: "black" }}>Lako ErrorPage</div>;
 }
 
 export default ErrorPage;
