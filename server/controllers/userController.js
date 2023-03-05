@@ -10,18 +10,25 @@ app.use(cookieParser());
 
 // REGISTER USER
 const registerUser = async (req, res) => {
+  const { first_name, last_name, store_name, user_name, user_password } =
+    req.body;
   try {
-    const { first_name, last_name, store_name, user_name, user_password } =
-      req.body;
     const hash = bcrypt.hashSync(user_password, 10);
-    const user = await User.create({
-      first_name: first_name,
-      last_name: last_name,
-      store_name: store_name,
-      user_name: user_name,
-      user_password: hash,
-    });
-    res.status(200).json(user);
+    const username = await User.findOne({ user_name: user_name }).exec();
+    if (username) {
+      res.status(200).json({
+        message: "USERNAME ALREADY IN USE, TRY OTHER USERNAME",
+      });
+    } else {
+      const user = await User.create({
+        first_name: first_name,
+        last_name: last_name,
+        store_name: store_name,
+        user_name: user_name,
+        user_password: hash,
+      });
+      res.status(200).json(user);
+    }
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
@@ -34,12 +41,12 @@ const userLogin = async (req, res) => {
 
   try {
     const user = await User.findOne({ user_name: user_name }).exec();
-    if (!user) res.status(400).json({ status: "not user" });
+    if (!user) res.status(400).json({ status: false });
     else {
       const hash = user.user_password;
       const match = await bcrypt.compare(user_password, hash);
       if (!match) {
-        res.status(400).json({ status: "wrong password" });
+        res.status(400).json({ status: true });
       } else {
         const accessToken = createToken(user._id);
         res.cookie("access-token", accessToken, {
@@ -49,12 +56,9 @@ const userLogin = async (req, res) => {
         });
 
         res.json({
-          isLoggedIn: true,
-          user: {
-            user_id: user._id,
-            first_name: user.first_name,
-            store_name: user.store_name,
-          },
+          user_id: user._id,
+          first_name: user.first_name,
+          store_name: user.store_name,
         });
       }
     }

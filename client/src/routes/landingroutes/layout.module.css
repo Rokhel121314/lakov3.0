@@ -75,14 +75,14 @@ body {
   letter-spacing: 3px;
   font-family: "Red Hat Display", sans-serif;
   text-shadow: 5px 5px 10px rgb(0, 0, 0);
-  transition: background-color 1s;
+  transition: background-color 2s;
   transition: color 0.5s;
 }
 
 .login-btn:hover {
   cursor: pointer;
-  background: #ffffff;
-  color: #39c643;
+  background-color: #085429;
+  color: white;
   text-shadow: 5px 5px 10px#39c643;
 }
 

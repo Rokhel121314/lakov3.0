@@ -2,15 +2,22 @@ import React, { useEffect } from "react";
 import styles from "./user.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../../redux/userSlice";
 
 function Login() {
   const navigate = useNavigate();
-  const { handleChange, handleLogin, status, user, userData } = useLogin();
+  const { handleChange, loginData, persistUserData, resetPasswordInput } =
+    useLogin();
+  const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.user);
+  const isBolean = typeof userData == "boolean";
+
   useEffect(() => {
-    if (userData) {
+    if (persistUserData) {
       navigate("/");
     } else return;
-  }, []);
+  }, [persistUserData, navigate]);
 
   return (
     <div className={styles["login-container"]}>
@@ -35,34 +42,49 @@ function Login() {
           <div className={styles["form-header"]}>Sign in to LAKO</div>
 
           {/* FORM */}
-          <form className={styles["form-subcontainer"]} onSubmit={handleLogin}>
+          <form
+            className={styles["form-subcontainer"]}
+            onSubmit={(e) => {
+              e.preventDefault();
+              dispatch(userLogin(loginData));
+              resetPasswordInput();
+            }}>
+            {/* USERNAME INPUT */}
             <div className={styles["form-inputcontainer"]}>
               <input
                 className={styles["form-inputfield"]}
                 type="text"
                 name="user_name"
-                value={user.user_name}
+                value={loginData.user_name}
                 onChange={handleChange}
                 placeholder="Username"
               />
             </div>
+
+            {/* PASSWORD INPUT */}
             <div className={styles["form-inputcontainer"]}>
               <input
                 className={styles["form-inputfield"]}
                 type="password"
                 name="user_password"
-                value={user.user_password}
+                value={loginData.user_password}
                 onChange={handleChange}
                 placeholder="Password"
               />
             </div>
             <div
               className={
-                status === "LOGGED IN SUCCESSFULLY"
+                !isBolean
                   ? styles["login-status-success"]
                   : styles["login-status-fail"]
               }>
-              {status}
+              {isBolean
+                ? userData
+                  ? "INCORRECT PASSWORD"
+                  : "USER DOES NOT EXIST"
+                : !persistUserData
+                ? ""
+                : "LOGGED IN SUCCESSFULLY"}
             </div>
             <div className={styles["form-inputcontainer"]}>
               <button type="submit" className={styles["form-button"]}>

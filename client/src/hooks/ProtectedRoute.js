@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({ userData, children }) {
+function ProtectedRoute({ persistUserData, children }) {
   //   console.log("userData", userData);
-  if (!userData) {
+  if (!persistUserData) {
     return <Navigate to="/login" replace />;
   } else {
     return children;
