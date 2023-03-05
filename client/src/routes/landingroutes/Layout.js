@@ -6,7 +6,7 @@ import LoginBtn from "../../components/LoginBtn";
 import LogoutBtn from "../../components/LogoutBtn";
 
 function Layout() {
-  const { userData, handleLogout } = useLogin();
+  const { persistUserData, handleLogout } = useLogin();
   return (
     <>
       <div className={styles["nav-container"]}>
@@ -28,10 +28,13 @@ function Layout() {
             HOW TO USE
           </NavLink>
           <NavLink to={"/login"} className={styles["nav-link"]}>
-            {!userData ? (
+            {!persistUserData ? (
               <LoginBtn />
             ) : (
-              <LogoutBtn userData={userData} handleLogout={handleLogout} />
+              <LogoutBtn
+                persistUserData={persistUserData}
+                handleLogout={handleLogout}
+              />
             )}
           </NavLink>
         </div>

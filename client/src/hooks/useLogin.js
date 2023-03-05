@@ -4,42 +4,23 @@ import { useNavigate } from "react-router-dom";
 
 function useLogin() {
   const [status, setStatus] = useState("");
-  const [user, setUser] = useState({ user_name: "", user_password: "" });
+  const [loginData, setLoginData] = useState({
+    user_name: "",
+    user_password: "",
+  });
 
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  const persistUserData = JSON.parse(localStorage.getItem("userData"));
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setLoginData({ ...loginData, [name]: value });
   };
 
-  //   USER LOG IN FUNCTION
-  const handleLogin = (e) => {
-    e.preventDefault();
-    try {
-      Axios.post("http://localhost:3001/users/login", user, {
-        withCredentials: true,
-      })
-        .then((response) => {
-          setStatus("LOGGED IN SUCCESSFULLY");
-          localStorage.setItem("userData", JSON.stringify(response.data.user));
-          navigate("/lako/stocks");
-        })
-        .catch((error) => {
-          const status = error.response.data.status;
-          if (status === "not user") {
-            setStatus("USER DOES NOT EXIST");
-          } else if (status === "wrong password") {
-            setStatus("WRONG PASSWORD");
-          }
-        });
-    } catch (error) {
-      console.log("error", error.message);
-    }
+  const resetPasswordInput = () => {
+    setLoginData({ ...loginData, user_password: "" });
   };
-
   // USER LOG OUT FUNCTION
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -59,11 +40,11 @@ function useLogin() {
 
   return {
     handleChange,
-    handleLogin,
     handleLogout,
     status,
-    userData,
-    user,
+    loginData,
+    persistUserData,
+    resetPasswordInput,
   };
 }
 

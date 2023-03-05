@@ -5,7 +5,8 @@ import ProtectedRoute from "../../hooks/ProtectedRoute";
 import useLogin from "../../hooks/useLogin";
 
 function Root() {
-  const { handleLogout, userData } = useLogin();
+  const { handleLogout, persistUserData } = useLogin();
+  console.log("persist", persistUserData);
   return (
     <>
       <div className={styles["root-container"]}>
@@ -61,11 +62,11 @@ function Root() {
         </nav>
         <div>
           <button onClick={handleLogout}>LOG OUT</button>
-          <div>{userData?.user_name}</div>
+          <div>{persistUserData?.first_name}</div>
         </div>
       </div>
       <div id="root">
-        <ProtectedRoute userData={userData}>
+        <ProtectedRoute persistUserData={persistUserData}>
           <Outlet />
         </ProtectedRoute>
       </div>
