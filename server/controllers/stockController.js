@@ -1,5 +1,6 @@
 const Stocks = require("../models/stockModel");
 const User = require("../models/userModel");
+const cloudinary = require("../cloudinary/cloudinary");
 
 // ADDING/CREATING PRODUCT TO DATABASE
 
@@ -14,23 +15,30 @@ const createProduct = async (req, res) => {
       product_image,
     } = req.body;
     const { user_id } = req.params;
-    User.findById(user_id).then(async (user) => {
-      const product = await Stocks.create({
-        product_name: product_name,
-        product_quantity: product_quantity,
-        original_price: original_price,
-        selling_price: selling_price,
-        product_type: product_type,
-        product_image: product_image,
-        created_by: {
-          user_id: user._id,
-          user_name: user.user_name,
-          store_name: user.store_name,
-        },
+    if (product_image) {
+      const image = await cloudinary.uploader.upload(product_image, {
+        upload_preset: "lako",
       });
-      res.status(200).json(product);
-      console.log("product added", product);
-    });
+      if (image) {
+        User.findById(user_id).then(async (user) => {
+          const product = await Stocks.create({
+            product_name: product_name,
+            product_quantity: product_quantity,
+            original_price: original_price,
+            selling_price: selling_price,
+            product_type: product_type,
+            product_image: image,
+            created_by: {
+              user_id: user._id,
+              user_name: user.user_name,
+              store_name: user.store_name,
+            },
+          });
+          res.status(200).json(product);
+          console.log("product added", product);
+        });
+      }
+    }
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

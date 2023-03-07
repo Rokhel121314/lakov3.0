@@ -4,6 +4,43 @@
 @import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&family=Playfair+Display:wght@800&display=swap");
 /* font-family: 'Playfair Display', serif; */
 
+.col-1 {
+  width: calc(100% * (1 / 12));
+}
+.col-2 {
+  width: calc(100% * (2 / 12));
+}
+.col-3 {
+  width: calc(100% * (3 / 12));
+}
+.col-4 {
+  width: calc(100% * (4 / 12));
+}
+.col-5 {
+  width: calc(100% * (5 / 12));
+}
+.col-6 {
+  width: calc(100% * (6 / 12));
+}
+.col-7 {
+  width: calc(100% * (7 / 12));
+}
+.col-8 {
+  width: calc(100% * (8 / 12));
+}
+.col-9 {
+  width: calc(100% * (9 / 12));
+}
+.col-10 {
+  width: calc(100% * (10 / 12));
+}
+.col-11 {
+  width: calc(100% * (11 / 12));
+}
+.col-12 {
+  width: calc(100% * (12 / 12));
+}
+
 body {
   margin: 0;
 }
@@ -13,4 +50,194 @@ body {
   width: 85%;
   float: right;
   color: black;
+  display: flex;
+}
+
+/* STOCK DETAIL CSS */
+.stockdetail-container {
+  width: 35%;
+  height: 100vh;
+}
+
+.stockdetail-header {
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stockdetail-stockstatus {
+  height: 3vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.status-container {
+  display: flex;
+  align-items: center;
+}
+
+.stockdetail-image-container {
+  height: 47vh;
+  width: 100%;
+}
+
+.stockdetail-image {
+  max-height: 47vh;
+  width: 100%;
+  height: 100%;
+}
+
+.stockdetail-statistics {
+  height: 35vh;
+  width: 100%;
+  background: greenyellow;
+}
+
+/* STOCK ADD PRODUCT CSS */
+.add-product-container {
+  width: 35%;
+  height: 100vh;
+}
+
+.add-product-header {
+  height: 10vh;
+  background: white;
+  display: flex;
+  align-items: center;
+}
+
+.add-product-form {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.form-container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add-product-inputtext {
+  width: 100%;
+  padding: 0.6rem 0;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.form-label {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+/* REMOVE ARROW BUTTON ON INPUT TYPE NUMBERS */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* STOCK DISPLAY CSS */
+.stocklist-container {
+  width: 65%;
+  height: 100vh;
+}
+
+.stocklist-header {
+  min-height: 10vh;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LIST VIEW CSS */
+.stocklist-section {
+  min-height: 90vh;
+  width: 100%;
+}
+
+.stocklist-tableheader {
+  min-height: 5vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.tableheader-text {
+  font-size: 0.8rem;
+  color: gray;
+  text-align: center;
+}
+
+.product-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.product-text {
+  font-size: 0.9rem;
+}
+
+.product-image {
+  height: 2rem;
+}
+
+/* GRID VIEW CSS */
+
+.stockgrid-section {
+  max-height: 90vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+.product-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  overflow-y: auto;
+}
+
+.product-button {
+  height: calc(100vw / 10);
+  width: calc(100vw / 10);
+  margin: 0.6rem 0.6rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(155, 155, 155, 0.5);
+  background: white;
+  position: relative;
+}
+
+.product-button-image {
+  width: calc(100vw / 11);
+}
+
+.product-button-priceqty {
+  position: absolute;
+  top: 0.4rem;
+}
+
+.product-button-name {
+  position: absolute;
+  width: 90%;
+  text-align: center;
 }
