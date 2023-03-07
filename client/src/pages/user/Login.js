@@ -21,6 +21,7 @@ function Login() {
 
   return (
     <div className={styles["login-container"]}>
+      {/* CONTENT */}
       <div className={styles["login-content"]}>
         <Link to={"/"} className={styles["login-content-header"]}>
           <img src={require("../../assests/logo/logo.png")} alt="logo" />
@@ -37,6 +38,8 @@ function Login() {
           </div>
         </div>
       </div>
+
+      {/* LOG IN INTERFACE/FORM */}
       <div className={styles["login-form"]}>
         <div className={styles["form-container"]}>
           <div className={styles["form-header"]}>Sign in to LAKO</div>
@@ -72,6 +75,8 @@ function Login() {
                 placeholder="Password"
               />
             </div>
+
+            {/* INPUT NOTICES */}
             <div
               className={
                 !isBolean

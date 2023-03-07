@@ -125,3 +125,11 @@ body {
   cursor: pointer;
   box-shadow: 5px 6px 10px rgb(182, 182, 182);
 }
+
+/* MEDIA QUERY  */
+
+@media (max-width: 768px) {
+  .registerpopup-box {
+    width: 85%;
+  }
+}

@@ -1,8 +1,11 @@
 import Axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { resetUserData } from "../redux/userSlice";
 
 function useLogin() {
+  const dispatch = useDispatch();
   const [status, setStatus] = useState("");
   const [loginData, setLoginData] = useState({
     user_name: "",
@@ -30,6 +33,7 @@ function useLogin() {
       });
       setStatus("LOGGED OUT");
       localStorage.removeItem("userData");
+      dispatch(resetUserData());
       setTimeout(() => {
         navigate("/login");
       }, 1000);

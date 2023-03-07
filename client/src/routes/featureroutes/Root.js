@@ -11,7 +11,9 @@ function Root() {
     <>
       <div className={styles["root-container"]}>
         <div className={styles["brand-container"]}>
-          <div className={styles["brand-name"]}>J's BAKERY</div>
+          <div className={styles["brand-name"]}>
+            {persistUserData.store_name.toUpperCase()}
+          </div>
           <div className={styles["sub-name"]}>POWERED BY LAKO</div>
         </div>
         <nav className={styles["nav-list"]}>
