@@ -8,10 +8,10 @@ import useLogin from "../../hooks/useLogin";
 function StockAddProduct() {
   const { formData, handleChange, handleChangeImage } = useAddProduct();
   const { persistUserData } = useLogin();
+  const dispatchData = { formData: formData, user_id: persistUserData.user_id };
   const { productData } = useSelector((state) => state.product);
-  const user_id = persistUserData.user_id;
   console.log("productData", productData);
-  console.log("user_id", user_id);
+
   const dispatch = useDispatch();
 
   return (
@@ -22,7 +22,7 @@ function StockAddProduct() {
         className={styles["add-product-form"]}
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(addProduct(formData, user_id));
+          dispatch(addProduct(dispatchData));
         }}>
         {/* PRODUCT NAME INPUT */}
         <div className={styles["form-container"]}>
@@ -36,52 +36,57 @@ function StockAddProduct() {
             value={formData.product_name}
             onChange={handleChange}
             placeholder="ex. Egg..."
+            required={true}
           />
         </div>
 
-        {/* PRODUCT QTY INPUT */}
-        <div className={styles["form-container"]}>
-          <label className={styles["form-label"]} htmlFor="product_name">
-            PRODUCT QUANTITY
-          </label>
-          <input
-            className={styles["add-product-inputtext"]}
-            type="number"
-            name="product_quantity"
-            value={formData.product_quantity}
-            onChange={handleChange}
-            placeholder="ex. 100.00"
-          />
-        </div>
-
-        {/* PRODUCT ORIGINAL PRICE INPUT */}
-        <div className={styles["form-container"]}>
-          <label className={styles["form-label"]} htmlFor="product_name">
-            ORIGINAL PRICE
-          </label>
-          <input
-            className={styles["add-product-inputtext"]}
-            type="number"
-            name="original_price"
-            value={formData.original_price}
-            onChange={handleChange}
-            placeholder="ex. $ 0.00"
-          />
-        </div>
-
-        {/* PRODUCT RESELL PRICE INPUT */}
-        <div className={styles["form-container"]}>
-          <label className={styles["form-label"]} htmlFor="product_name">
-            RESELL PRICE
-          </label>
-          <input
-            className={styles["add-product-inputtext"]}
-            type="number"
-            name="selling_price"
-            value={formData.selling_price}
-            onChange={handleChange}
-            placeholder="ex. $ 0.00"
-          />
+        <div className={styles["numberinputs-container"]}>
+          {/* PRODUCT QTY INPUT */}
+          <div className={styles["numberinputs-subcontainer"]}>
+            <label className={styles["form-label"]} htmlFor="product_name">
+              QUANTITY
+            </label>
+            <input
+              className={styles["add-product-inputnumber"]}
+              type="number"
+              name="product_quantity"
+              value={formData.product_quantity}
+              onChange={handleChange}
+              placeholder="ex. 100.00"
+              required={true}
+            />
+          </div>
+          {/* PRODUCT ORIGINAL PRICE INPUT */}
+          <div className={styles["numberinputs-subcontainer"]}>
+            <label className={styles["form-label"]} htmlFor="product_name">
+              ORIGINAL PRICE
+            </label>
+            <input
+              className={styles["add-product-inputnumber"]}
+              type="number"
+              name="original_price"
+              value={formData.original_price}
+              onChange={handleChange}
+              placeholder="ex. $ 0.00"
+              required={true}
+            />
+          </div>
+          {/* PRODUCT RESELL PRICE INPUT */}
+          <div className={styles["numberinputs-subcontainer"]}>
+            {" "}
+            <label className={styles["form-label"]} htmlFor="product_name">
+              RESELL PRICE
+            </label>
+            <input
+              className={styles["add-product-inputnumber"]}
+              type="number"
+              name="selling_price"
+              value={formData.selling_price}
+              onChange={handleChange}
+              placeholder="ex. $ 0.00"
+              required={true}
+            />
+          </div>
         </div>
 
         {/* PRODUCT TYPE */}
@@ -96,26 +101,40 @@ function StockAddProduct() {
             value={formData.product_type}
             onChange={handleChange}
             placeholder="ex. food..."
+            required={true}
           />
         </div>
 
         {/* PRODUCT IMAGE */}
-        <div className={styles["form-container"]}>
-          <label className={styles["form-label"]} htmlFor="product_name">
-            UPLOAD PRODUCT IMAGE
-          </label>
-          <input
-            className={styles["add-product-inputtext"]}
-            type="file"
-            name="product_image"
-            onChange={handleChangeImage}
-            placeholder="ex. food..."
-            accept="image/*"
-          />
-          <img src={`${formData.product_image}`} alt="img" />
+        <div className={styles["image-container"]}>
+          <div className={`${styles["col-12"]}`}>
+            <label className={styles["form-label"]} htmlFor="product_name">
+              UPLOAD PRODUCT IMAGE
+            </label>
+            <input
+              className={styles["add-product-inputtext"]}
+              type="file"
+              name="product_image"
+              onChange={handleChangeImage}
+              placeholder="ex. food..."
+              accept="image/*"
+              required={true}
+            />
+          </div>
+          {formData.product_image ? (
+            <img
+              className={`${styles["image-preview"]} ${styles["col-12"]}`}
+              src={`${formData.product_image}`}
+              alt="img"
+            />
+          ) : (
+            ""
+          )}
         </div>
-        <div>
-          <button type="sumbit">SAVE PRODUCT</button>
+        <div className={styles["button-container"]}>
+          <button className={styles["saveproduct-button"]} type="sumbit">
+            SAVE PRODUCT
+          </button>
         </div>
       </form>
     </div>

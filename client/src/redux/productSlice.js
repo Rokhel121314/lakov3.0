@@ -5,15 +5,21 @@ import Axios from "axios";
 // FUNCTION FOR ADDING PRODUCT TO DATABASE
 export const addProduct = createAsyncThunk(
   "product/add",
-  async (formData, user_id) => {
+  async (dispatchData) => {
+    const { formData, user_id } = dispatchData;
+    console.log("user_id1", user_id);
+    console.log("formDatax1", formData);
     try {
       const { data } = await Axios.post(
         `http://localhost:3001/products/${user_id}`,
-        formData
+        formData,
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
       console.log("error", error);
+      console.log("user_id", user_id);
+      console.log("formDatax", formData);
     }
   }
 );
