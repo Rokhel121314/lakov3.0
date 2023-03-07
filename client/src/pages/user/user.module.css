@@ -226,3 +226,57 @@ body {
 .register-footer {
   text-shadow: 5px 5px 10px rgb(7, 7, 7);
 }
+
+/* MEDIA QUERY FOR LOG IN PAGE AND REGISTER PAGE */
+
+@media (max-width: 768px) {
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  .login-content-section {
+    display: none;
+  }
+  .login-content {
+    height: 15vh;
+    width: 100%;
+  }
+
+  .login-content-header {
+    height: 15vh;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .login-content-header > img {
+    height: 8vh;
+  }
+
+  .login-form {
+    width: 100%;
+    height: 85vh;
+  }
+
+  .form-container {
+    height: 75vh;
+  }
+
+  /* REGISTER */
+
+  .register-form {
+    width: 100%;
+    height: 85vh;
+  }
+  .register-container {
+    width: 90%;
+    height: 80vh;
+  }
+
+  .register-header {
+    width: 100%;
+    text-align: center;
+  }
+}

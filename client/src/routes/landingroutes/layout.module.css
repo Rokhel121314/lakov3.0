@@ -22,7 +22,7 @@ body {
 }
 
 .nav-container {
-  height: 10vh;
+  max-height: 10vh;
   width: 100%;
   background: #000000;
   /* background-image: url("../../assests/images/backgroundimageoption3.png"); */
@@ -37,6 +37,7 @@ body {
 }
 
 .nav-brand {
+  width: 30%;
   margin-left: 6rem;
   text-decoration: none;
   color: white;
@@ -44,24 +45,57 @@ body {
 }
 
 .nav-logo {
-  height: 8vh;
+  max-height: 8vh;
 }
 
 .nav-items {
+  width: 70%;
+  /* min-width: 100%; */
   display: flex;
-  margin-right: 6rem;
+  justify-content: space-around;
+  margin-right: 2rem;
 }
 
 .nav-link {
-  margin-left: 4rem;
+  margin-left: 1rem;
   text-decoration: none;
   color: rgb(255, 255, 255);
   letter-spacing: 0.2rem;
+  font-size: 0.8rem;
   font-weight: 600;
   font-family: "Red Hat Display", sans-serif;
   text-shadow: 5px 5px 10px rgb(111, 108, 108);
   display: flex;
   align-items: center;
+}
+
+.navmenu-icon {
+  display: none;
+}
+
+/* media queries for navigation bar */
+@media (max-width: 768px) {
+  .nav-container {
+    min-height: 8vh;
+  }
+
+  .nav-items {
+    display: none;
+  }
+  .nav-brand {
+    margin-left: 1rem;
+  }
+  .nav-logo {
+    max-height: 7vh;
+    margin-top: 0.4rem;
+  }
+
+  .navmenu-icon {
+    margin-right: 2rem;
+    font-size: 2rem;
+    display: block;
+    cursor: pointer;
+  }
 }
 
 /* LOGIN BTN CSS */
@@ -100,26 +134,126 @@ body {
 
 .first-name {
   font-size: 1.2rem;
-  margin-right: 0.5rem;
+  margin-right: 0rem;
   color: #39c643;
 }
 
-.user-icon {
+.user-icon-close {
   font-size: 2rem;
   color: #39c643;
+  cursor: pointer;
+}
+.user-icon-open {
+  font-size: 2rem;
+  color: #39c643;
+  cursor: pointer;
+  transform: rotate(180deg);
 }
 
 .drop-down-container {
   position: absolute;
   top: 6vh;
   right: 0;
-  min-height: 20vh;
-  width: 150px;
+  width: 180px;
   z-index: 11;
   background: white;
   color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  font-family: "Kantumruy Pro", sans-serif;
+}
+
+.drop-down-container-hide {
+  display: none;
+}
+
+.dropdown-list {
+  width: 100%;
+  padding: 0.5rem 0rem;
+  text-shadow: none;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  display: flex;
+}
+
+.dropdown-list:hover {
+  color: #ffffff;
+  background: #085429;
+}
+
+.dropdown-text {
+  margin-left: 0.4rem;
+}
+
+.dropdown-icon {
+  margin-left: 0.5rem;
+}
+
+/* SMALL VIEW NAVIGATION BAR */
+
+.nav-container-sm {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-container-sm {
+    height: 92vh;
+    width: 70%;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    left: calc(100% - 70%);
+    top: calc(100vh - 92vh);
+    display: block;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navsm-item {
+    text-decoration: none;
+    padding: 1rem 0;
+    color: white;
+    font-size: 1.2rem;
+    font-family: "Kantumruy Pro", sans-serif;
+    display: flex;
+    position: relative;
+  }
+
+  .navsm-icons {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .navdropdown-icon {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+
+  /* NAVUSERDROPDOWN SM CSS */
+  .navusersm-container {
+    /* background: red; */
+    position: absolute;
+    top: 3rem;
+    width: 100%;
+  }
+
+  .navusersm-list {
+    padding: 0.5rem 0;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: white;
+  }
+
+  .navusersm-list-icon {
+    margin-left: 3rem;
+  }
+
+  .navusersm-list-text {
+    margin-left: 1rem;
+  }
 }
