@@ -25,7 +25,7 @@ const stocksSchema = mongoose.Schema(
       required: [true, "add a product type!"],
     },
     product_image: {
-      type: String,
+      type: Object,
       required: [true, "add a product image!"],
     },
     created_by: {

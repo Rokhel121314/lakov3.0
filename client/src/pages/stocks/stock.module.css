@@ -4,6 +4,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&family=Playfair+Display:wght@800&display=swap");
 /* font-family: 'Playfair Display', serif; */
 
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@800&display=swap");
+/* font-family: 'Red Hat Display', sans-serif; */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+/* font-family: 'Roboto Mono', monospace; */
+
+/* rgb(8,84,41) */
+/* #085429 */
+
+/* #39C643 */
+/* rgb(57,198,67) */
+
+/* FFFFFF */
+/* rgb(255,255,255) */
+
+.col-1 {
+  width: calc(100% * (1 / 12));
+}
+.col-2 {
+  width: calc(100% * (2 / 12));
+}
+.col-3 {
+  width: calc(100% * (3 / 12));
+}
+.col-4 {
+  width: calc(100% * (4 / 12));
+}
+.col-5 {
+  width: calc(100% * (5 / 12));
+}
+.col-6 {
+  width: calc(100% * (6 / 12));
+}
+.col-7 {
+  width: calc(100% * (7 / 12));
+}
+.col-8 {
+  width: calc(100% * (8 / 12));
+}
+.col-9 {
+  width: calc(100% * (9 / 12));
+}
+.col-10 {
+  width: calc(100% * (10 / 12));
+}
+.col-11 {
+  width: calc(100% * (11 / 12));
+}
+.col-12 {
+  width: calc(100% * (12 / 12));
+}
+
 body {
   margin: 0;
 }
@@ -13,4 +65,357 @@ body {
   width: 85%;
   float: right;
   color: black;
+  display: flex;
+  /* font-family: "Kantumruy Pro", sans-serif; */
+}
+
+/* STOCK DETAIL CSS */
+.stockdetail-container {
+  width: 35%;
+  height: 100vh;
+  background: rgb(241, 240, 240);
+}
+
+.stockdetail-header {
+  height: 5vh;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.utility-delete-btn {
+  border: none;
+  display: flex;
+  font-size: 0.7rem;
+  padding: 0.4rem 1rem;
+  border-radius: calc((0.4rem * 2) + 0.7rem);
+  margin-right: 1rem;
+  background: #ea668c;
+  color: white;
+}
+
+.utility-update-btn {
+  border: none;
+  display: flex;
+  font-size: 0.7rem;
+  padding: 0.4rem 1rem;
+  border-radius: calc((0.4rem * 2) + 0.7rem);
+  margin-right: 1rem;
+  background: #39c643;
+  color: white;
+}
+
+.utility-delete-btn:hover,
+.utility-update-btn:hover {
+  cursor: pointer;
+  background: gray;
+  color: white;
+}
+
+.edit-text {
+  margin-left: 0.5rem;
+}
+
+.productdetail-container {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-left: 1rem;
+}
+
+.product-id {
+  margin-left: 1rem;
+  font-size: 0.7rem;
+  color: gray;
+}
+
+.stockdetail-stockstatus {
+  height: 3vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.status-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-onstock {
+  accent-color: rgb(3, 167, 39);
+}
+
+.checkbox-lowstock {
+  accent-color: rgb(246, 207, 13);
+}
+
+.checkbox-outstock {
+  accent-color: rgb(249, 0, 0);
+}
+
+.stockdetail-image-container {
+  height: 35vh;
+  width: 100%;
+  text-align: center;
+}
+
+.stockdetail-image {
+  max-height: 30vh;
+  max-width: 100%;
+  height: 100%;
+}
+
+.stock-details {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.detail-subcontainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-header {
+  width: 40%;
+  font-size: 0.7rem;
+  color: gray;
+  text-align: start;
+  font-family: "Roboto Mono", monospace;
+}
+
+.detail-content {
+  width: 40%;
+  font-weight: 600;
+  font-family: "Roboto Mono", monospace;
+  text-align: start;
+}
+.stockdetail-statistics {
+  height: 42vh;
+  width: 100%;
+  /* background: greenyellow; */
+}
+
+/* STOCK ADD PRODUCT CSS */
+.add-product-container {
+  width: 35%;
+  height: 100vh;
+}
+
+.add-product-header {
+  height: 10vh;
+  background: white;
+  display: flex;
+  align-items: center;
+}
+
+.add-product-form {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+  align-items: center;
+}
+
+.form-container {
+  height: 12vh;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.numberinputs-container {
+  height: 12vh;
+  display: flex;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.numberinputs-subcontainer {
+  width: calc(100% * 4 / 12);
+}
+
+.image-container {
+  height: 45vh;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-product-inputtext {
+  width: 100%;
+  padding: 0.6rem 0;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.add-product-inputnumber {
+  width: 90%;
+  padding: 0.6rem 0;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.form-label {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.image-preview {
+  height: 35vh;
+  width: 35vh;
+}
+
+.button-container {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.saveproduct-button {
+  padding: 0.7rem 2rem;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+}
+
+/* REMOVE ARROW BUTTON ON INPUT TYPE NUMBERS */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* STOCK DISPLAY CSS */
+.stocklist-container {
+  width: 65%;
+  height: 100vh;
+}
+
+.stocklist-header {
+  min-height: 10vh;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LIST VIEW CSS */
+.stocklist-section {
+  min-height: 90vh;
+  width: 100%;
+}
+
+.stocklist-tableheader {
+  min-height: 5vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.stocklist-tablebody {
+  height: 85vh;
+  overflow-y: auto;
+}
+
+.tableheader-text {
+  font-size: 0.8rem;
+  color: gray;
+  text-align: center;
+}
+
+.product-container {
+  width: 100%;
+  border: none;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.product-container:hover {
+  background: rgb(199, 199, 199);
+}
+
+.product-text {
+  font-size: 0.9rem;
+}
+
+.product-image {
+  height: 2rem;
+}
+
+/* GRID VIEW CSS */
+
+.stockgrid-section {
+  max-height: 90vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+.product-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  overflow-y: auto;
+}
+
+.product-button {
+  height: calc(100vw / 10);
+  width: calc(100vw / 10);
+  margin: 0.6rem 0.6rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(155, 155, 155, 0.5);
+  background: white;
+  position: relative;
+}
+
+.product-button-image {
+  width: calc(100vw / 15);
+  height: calc(100vw / 15);
+}
+
+.product-button-priceqty {
+  position: absolute;
+  top: 0.4rem;
+}
+
+.product-button-name {
+  position: absolute;
+  width: 90%;
+  text-align: center;
+}
+
+.product-button:hover {
+  cursor: pointer;
+  background: rgb(249, 242, 242);
 }

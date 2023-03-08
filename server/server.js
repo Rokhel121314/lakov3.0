@@ -3,6 +3,7 @@ const dotenv = require("dotenv").config();
 const cors = require("cors");
 const connectDB = require("./config/connectDB");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 // imports for user
 const User = require("./models/userModel");
@@ -15,8 +16,10 @@ const stockRoutes = require("./routes/stockRoutes");
 const app = express();
 
 // MIDDLE WARES
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(bodyParser.json({ limit: "50mb" }));
+// app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: true }));
 app.use(stockRoutes);

@@ -5,7 +5,15 @@ const useToggle = (initialValue = false) => {
   const toggle = () => {
     setValue((prev) => !prev);
   };
-  return { value, toggle };
+
+  const toggleTrueOnly = () => {
+    setValue(true);
+  };
+
+  const toggleFalseOnly = () => {
+    setValue(false);
+  };
+  return { value, toggle, toggleTrueOnly, toggleFalseOnly };
 };
 
 export default useToggle;
