@@ -1,16 +1,15 @@
 import React from "react";
 import useAddProduct from "../../hooks/useAddProduct";
 import styles from "./stock.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/productSlice";
 import useLogin from "../../hooks/useLogin";
 
 function StockAddProduct() {
-  const { formData, handleChange, handleChangeImage } = useAddProduct();
+  const { formData, handleChange, handleChangeImage, resetFormdata } =
+    useAddProduct();
   const { persistUserData } = useLogin();
   const dispatchData = { formData: formData, user_id: persistUserData.user_id };
-  const { productData } = useSelector((state) => state.product);
-  console.log("productData", productData);
 
   const dispatch = useDispatch();
 
@@ -23,6 +22,8 @@ function StockAddProduct() {
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(addProduct(dispatchData));
+          window.alert("PRODUCT SAVED!");
+          resetFormdata();
         }}>
         {/* PRODUCT NAME INPUT */}
         <div className={styles["form-container"]}>

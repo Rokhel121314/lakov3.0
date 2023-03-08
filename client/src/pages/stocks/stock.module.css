@@ -4,6 +4,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&family=Playfair+Display:wght@800&display=swap");
 /* font-family: 'Playfair Display', serif; */
 
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@800&display=swap");
+/* font-family: 'Red Hat Display', sans-serif; */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+/* font-family: 'Roboto Mono', monospace; */
+
+/* rgb(8,84,41) */
+/* #085429 */
+
+/* #39C643 */
+/* rgb(57,198,67) */
+
+/* FFFFFF */
+/* rgb(255,255,255) */
+
 .col-1 {
   width: calc(100% * (1 / 12));
 }
@@ -51,20 +66,75 @@ body {
   float: right;
   color: black;
   display: flex;
+  /* font-family: "Kantumruy Pro", sans-serif; */
 }
 
 /* STOCK DETAIL CSS */
 .stockdetail-container {
   width: 35%;
   height: 100vh;
+  background: rgb(241, 240, 240);
 }
 
 .stockdetail-header {
-  height: 15vh;
+  height: 5vh;
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.utility-delete-btn {
+  border: none;
+  display: flex;
+  font-size: 0.7rem;
+  padding: 0.4rem 1rem;
+  border-radius: calc((0.4rem * 2) + 0.7rem);
+  margin-right: 1rem;
+  background: #ea668c;
+  color: white;
+}
+
+.utility-update-btn {
+  border: none;
+  display: flex;
+  font-size: 0.7rem;
+  padding: 0.4rem 1rem;
+  border-radius: calc((0.4rem * 2) + 0.7rem);
+  margin-right: 1rem;
+  background: #39c643;
+  color: white;
+}
+
+.utility-delete-btn:hover,
+.utility-update-btn:hover {
+  cursor: pointer;
+  background: gray;
+  color: white;
+}
+
+.edit-text {
+  margin-left: 0.5rem;
+}
+
+.productdetail-container {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-left: 1rem;
+}
+
+.product-id {
+  margin-left: 1rem;
+  font-size: 0.7rem;
+  color: gray;
 }
 
 .stockdetail-stockstatus {
@@ -81,21 +151,62 @@ body {
   align-items: center;
 }
 
+.checkbox-onstock {
+  accent-color: rgb(3, 167, 39);
+}
+
+.checkbox-lowstock {
+  accent-color: rgb(246, 207, 13);
+}
+
+.checkbox-outstock {
+  accent-color: rgb(249, 0, 0);
+}
+
 .stockdetail-image-container {
-  height: 47vh;
+  height: 35vh;
   width: 100%;
+  text-align: center;
 }
 
 .stockdetail-image {
-  max-height: 47vh;
-  width: 100%;
+  max-height: 30vh;
+  max-width: 100%;
   height: 100%;
 }
 
-.stockdetail-statistics {
-  height: 35vh;
+.stock-details {
   width: 100%;
-  background: greenyellow;
+  height: 10vh;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.detail-subcontainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-header {
+  width: 40%;
+  font-size: 0.7rem;
+  color: gray;
+  text-align: start;
+  font-family: "Roboto Mono", monospace;
+}
+
+.detail-content {
+  width: 40%;
+  font-weight: 600;
+  font-family: "Roboto Mono", monospace;
+  text-align: start;
+}
+.stockdetail-statistics {
+  height: 42vh;
+  width: 100%;
+  /* background: greenyellow; */
 }
 
 /* STOCK ADD PRODUCT CSS */
@@ -223,6 +334,11 @@ input::-webkit-inner-spin-button {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
+.stocklist-tablebody {
+  height: 85vh;
+  overflow-y: auto;
+}
+
 .tableheader-text {
   font-size: 0.8rem;
   color: gray;
@@ -230,6 +346,9 @@ input::-webkit-inner-spin-button {
 }
 
 .product-container {
+  width: 100%;
+  border: none;
+  background: white;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -237,6 +356,11 @@ input::-webkit-inner-spin-button {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.product-container:hover {
+  background: rgb(199, 199, 199);
 }
 
 .product-text {
@@ -276,7 +400,8 @@ input::-webkit-inner-spin-button {
 }
 
 .product-button-image {
-  width: calc(100vw / 11);
+  width: calc(100vw / 15);
+  height: calc(100vw / 15);
 }
 
 .product-button-priceqty {
@@ -288,4 +413,9 @@ input::-webkit-inner-spin-button {
   position: absolute;
   width: 90%;
   text-align: center;
+}
+
+.product-button:hover {
+  cursor: pointer;
+  background: rgb(249, 242, 242);
 }

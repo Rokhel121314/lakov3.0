@@ -10,8 +10,6 @@ function useAddProduct() {
     product_image: "",
   });
 
-  console.log("formData", formData);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -35,7 +33,18 @@ function useAddProduct() {
       setFormData({ ...formData });
     }
   };
-  return { formData, handleChange, handleChangeImage };
+
+  const resetFormdata = () => {
+    setFormData({
+      product_name: "",
+      product_quantity: "",
+      original_price: "",
+      selling_price: "",
+      product_type: "",
+      product_image: "",
+    });
+  };
+  return { formData, handleChange, handleChangeImage, resetFormdata };
 }
 
 export default useAddProduct;

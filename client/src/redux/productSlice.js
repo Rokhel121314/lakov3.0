@@ -7,8 +7,7 @@ export const addProduct = createAsyncThunk(
   "product/add",
   async (dispatchData) => {
     const { formData, user_id } = dispatchData;
-    console.log("user_id1", user_id);
-    console.log("formDatax1", formData);
+
     try {
       const { data } = await Axios.post(
         `http://localhost:3001/products/${user_id}`,
@@ -18,8 +17,22 @@ export const addProduct = createAsyncThunk(
       return data;
     } catch (error) {
       console.log("error", error);
-      console.log("user_id", user_id);
-      console.log("formDatax", formData);
+    }
+  }
+);
+
+// REQUEST FOR READING ALL PRODUCT FORM DATABASE
+export const readAllProduct = createAsyncThunk(
+  "product/read",
+  async (user_id) => {
+    try {
+      const { data } = await Axios.get(
+        `http://localhost:3001/products/${user_id}`,
+        { withCredentials: true }
+      );
+      return data;
+    } catch (error) {
+      console.log("error", error);
     }
   }
 );
@@ -29,10 +42,16 @@ export const productSlice = createSlice({
   name: "product",
   initialState: {
     productData: [],
+    allProductData: [],
+    productDetail: [],
     isLoading: false,
     isSuccess: false,
   },
-  reducers: {},
+  reducers: {
+    getProductDetail: (state, { payload }) => {
+      state.productDetail = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addProduct.pending, (state, { payload }) => {
@@ -47,8 +66,20 @@ export const productSlice = createSlice({
         state.productData = payload;
         state.isLoading = false;
         state.isSuccess = false;
+      })
+      .addCase(readAllProduct.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(readAllProduct.fulfilled, (state, { payload }) => {
+        state.allProductData = payload;
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(readAllProduct.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = false;
       });
   },
 });
-
+export const { getProductDetail } = productSlice.actions;
 export default productSlice.reducer;

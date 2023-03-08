@@ -1,7 +1,12 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./stock.module.css";
+import { getProductDetail } from "../../redux/productSlice";
 
 function StockListView({ toggleTrueOnly }) {
+  const { allProductData } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+
   return (
     <>
       {/* DISPLAYING PRODUCT LIST/GRID VIEW */}
@@ -9,7 +14,7 @@ function StockListView({ toggleTrueOnly }) {
         {/* TABLE HEADER */}
         <div className={styles["stocklist-tableheader"]}>
           <div className={`${styles["tableheader-text"]} ${styles["col-1"]}`}>
-            ID
+            #
           </div>
           <div className={`${styles["tableheader-text"]} ${styles["col-3"]}`}>
             PRODUCT IMAGE
@@ -29,58 +34,53 @@ function StockListView({ toggleTrueOnly }) {
         </div>
 
         {/* TABLE BODY */}
+
         <div className={styles["stocklist-tablebody"]}>
+          {!allProductData
+            ? "NO PRODUCT TO DISPLAY"
+            : allProductData.map((product, index) => {
+                return (
+                  <button
+                    className={styles["product-container"]}
+                    onClick={() => {
+                      dispatch(getProductDetail(product));
+                      toggleTrueOnly();
+                    }}
+                    key={product._id}>
+                    <div
+                      className={`${styles["product-text"]} ${styles["col-1"]}`}>
+                      {index++ + 1}
+                    </div>
+                    <div
+                      className={`${styles["product-text"]} ${styles["col-3"]}`}>
+                      <img
+                        className={styles["product-image"]}
+                        src={product.product_image.url}
+                        alt="img"
+                      />
+                    </div>
+                    <div
+                      className={`${styles["product-text"]} ${styles["col-3"]}`}>
+                      {product.product_name}
+                    </div>
+                    <div
+                      className={`${styles["product-text"]} ${styles["col-1"]}`}>
+                      {product.product_quantity}
+                    </div>
+                    <div
+                      className={`${styles["product-text"]} ${styles["col-2"]}`}>
+                      {product.selling_price}
+                    </div>
+                    <div
+                      className={`${styles["product-text"]} ${styles["col-2"]}`}>
+                      {product.updatedAt}
+                    </div>
+                  </button>
+                );
+              })}
+
           {/* PRODUCT CONTAINER */}
-          <div className={styles["product-container"]} onClick={toggleTrueOnly}>
-            <div className={`${styles["product-text"]} ${styles["col-1"]}`}>
-              #011
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-3"]}`}>
-              <img
-                className={styles["product-image"]}
-                src="https://www.shutterstock.com/image-photo/eggs-isolated-on-white-background-260nw-496251349.jpg"
-                alt="img"
-              />
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-3"]}`}>
-              EGG
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-1"]}`}>
-              100 PCS
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-2"]}`}>
-              $ 5.00
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-2"]}`}>
-              3/7/2023
-            </div>
-          </div>
-          {/* END OF PRODUCT CONTAINER */}
-          {/* PRODUCT CONTAINER */}
-          <div className={styles["product-container"]}>
-            <div className={`${styles["product-text"]} ${styles["col-1"]}`}>
-              #012
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-3"]}`}>
-              <img
-                className={styles["product-image"]}
-                src="https://media.istockphoto.com/id/499147864/photo/garlic.jpg?s=612x612&w=0&k=20&c=-9b483V6UP2UrljEYZDcEBEwzkPqb3u5MIJ3-Maofuc="
-                alt="img"
-              />
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-3"]}`}>
-              EGG
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-1"]}`}>
-              100 PCS
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-2"]}`}>
-              $ 5.00
-            </div>
-            <div className={`${styles["product-text"]} ${styles["col-2"]}`}>
-              3/7/2023
-            </div>
-          </div>
+
           {/* END OF PRODUCT CONTAINER */}
         </div>
       </section>

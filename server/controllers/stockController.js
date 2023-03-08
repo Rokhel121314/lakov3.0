@@ -35,7 +35,7 @@ const createProduct = async (req, res) => {
             },
           });
           res.status(200).json(product);
-          console.log("product added", product);
+          console.log("product added", product.product_name);
         });
       }
     }
@@ -51,7 +51,7 @@ const readAllProduct = async (req, res) => {
     const { user_id } = req.params;
     const product = await Stocks.find({ "created_by.user_id": user_id });
     res.status(200).json(product);
-    console.log("product", product);
+    console.log("reading all product");
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
