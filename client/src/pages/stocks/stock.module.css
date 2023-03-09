@@ -10,6 +10,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 /* font-family: 'Roboto Mono', monospace; */
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+/* font-family: 'Montserrat', sans-serif; */
+
 /* rgb(8,84,41) */
 /* #085429 */
 
@@ -73,7 +77,9 @@ body {
 .stockdetail-container {
   width: 35%;
   height: 100vh;
-  background: rgb(241, 240, 240);
+  background: rgb(255, 255, 255);
+  border-right: 1px solid #344c57;
+  position: relative;
 }
 
 .stockdetail-header {
@@ -87,11 +93,11 @@ body {
 .utility-delete-btn {
   border: none;
   display: flex;
-  font-size: 0.7rem;
-  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.7rem;
   border-radius: calc((0.4rem * 2) + 0.7rem);
   margin-right: 1rem;
-  background: #ea668c;
+  background: #344c57;
   color: white;
 }
 
@@ -101,16 +107,16 @@ body {
   font-size: 0.7rem;
   padding: 0.4rem 1rem;
   border-radius: calc((0.4rem * 2) + 0.7rem);
-  margin-right: 1rem;
-  background: #39c643;
+  margin-right: 0.4rem;
+  background: #344c57;
   color: white;
 }
 
 .utility-delete-btn:hover,
 .utility-update-btn:hover {
   cursor: pointer;
-  background: gray;
-  color: white;
+  background: #dee5ee;
+  color: black;
 }
 
 .edit-text {
@@ -207,95 +213,6 @@ body {
   height: 42vh;
   width: 100%;
   /* background: greenyellow; */
-}
-
-/* STOCK ADD PRODUCT CSS */
-.add-product-container {
-  width: 35%;
-  height: 100vh;
-}
-
-.add-product-header {
-  height: 10vh;
-  background: white;
-  display: flex;
-  align-items: center;
-}
-
-.add-product-form {
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-evenly; */
-  align-items: center;
-}
-
-.form-container {
-  height: 12vh;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.numberinputs-container {
-  height: 12vh;
-  display: flex;
-  width: 90%;
-  text-align: center;
-  display: flex;
-  align-items: center;
-}
-
-.numberinputs-subcontainer {
-  width: calc(100% * 4 / 12);
-}
-
-.image-container {
-  height: 45vh;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.add-product-inputtext {
-  width: 100%;
-  padding: 0.6rem 0;
-  border-radius: 1rem;
-  text-align: center;
-}
-
-.add-product-inputnumber {
-  width: 90%;
-  padding: 0.6rem 0;
-  border-radius: 1rem;
-  text-align: center;
-}
-
-.form-label {
-  text-align: center;
-  font-size: 0.9rem;
-  margin-bottom: 0.2rem;
-}
-
-.image-preview {
-  height: 35vh;
-  width: 35vh;
-}
-
-.button-container {
-  height: 10vh;
-  display: flex;
-  align-items: center;
-}
-
-.saveproduct-button {
-  padding: 0.7rem 2rem;
-  background: green;
-  color: white;
-  border: none;
-  border-radius: 1rem;
 }
 
 /* REMOVE ARROW BUTTON ON INPUT TYPE NUMBERS */
@@ -418,4 +335,140 @@ input::-webkit-inner-spin-button {
 .product-button:hover {
   cursor: pointer;
   background: rgb(249, 242, 242);
+}
+
+/* stockaddproduct test.css */
+
+.addstock-container {
+  width: 35%;
+  height: 100vh;
+  background: rgb(209, 209, 209);
+  border-right: 1px solid #344c57;
+}
+
+.addstock-header {
+  height: 12vh;
+  background: #fff;
+  color: #344c57;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px rgb(132, 129, 129);
+}
+
+.addstock-images {
+  height: 38vh;
+  background: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploaded-preview {
+  /* border: 1px solid black; */
+  max-height: 30vh;
+  max-width: 30vh;
+  height: 100%;
+  width: 100%;
+}
+
+.blank-preview {
+  border: 1px solid rgb(116, 114, 114);
+  max-height: 30vh;
+  max-width: 30vh;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addstock-forms {
+  height: 50vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addstock-inputcontainer {
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.addstock-numberinputcontainer {
+  width: 82%;
+  height: 5vh;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.addstock-input {
+  height: 5vh;
+  width: 80%;
+  border: 2px solid #344c57;
+  border-radius: 10px;
+  text-align: center;
+}
+.addstock-numberinput {
+  height: 5vh;
+  width: 45%;
+  border: 2px solid #344c57;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.addstock-inputfile {
+  display: none;
+}
+
+.addstock-filelabel {
+  height: 5vh;
+  width: 80%;
+  border: 2px solid #344c57;
+  border-radius: 10px;
+}
+.addstock-uploadimage {
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+}
+
+.addstock-buttoncontainer {
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.addstock-button {
+  height: 8vh;
+  width: 80%;
+  border: none;
+  background: #344c57;
+  color: white;
+  text-shadow: 1px 1px 5px rgb(26, 23, 23);
+  letter-spacing: 1px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.addstock-button:hover {
+  background: #364f5b;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
 }

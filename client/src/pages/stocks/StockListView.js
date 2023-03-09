@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./stock.module.css";
-import { getProductDetail } from "../../redux/productSlice";
+import { getProductDetail, getProductIndex } from "../../redux/productSlice";
 
 function StockListView({ toggleTrueOnly }) {
   const { allProductData } = useSelector((state) => state.product);
@@ -44,6 +44,7 @@ function StockListView({ toggleTrueOnly }) {
                     className={styles["product-container"]}
                     onClick={() => {
                       dispatch(getProductDetail(product));
+                      dispatch(getProductIndex(index - 1));
                       toggleTrueOnly();
                     }}
                     key={product._id}>

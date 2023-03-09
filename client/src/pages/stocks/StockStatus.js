@@ -12,6 +12,7 @@ function StockStatus({ qty }) {
             type="checkbox"
             name="onstock1"
             checked={true}
+            readOnly={true}
             // disabled={true}
           />
           <label htmlFor="onstock">ON STOCK</label>
@@ -22,6 +23,7 @@ function StockStatus({ qty }) {
             name="lowstock1"
             disabled={true}
             checked={false}
+            readOnly={true}
           />
           <label htmlFor="lowstock">LOW ON STOCK</label>
         </div>
@@ -31,6 +33,7 @@ function StockStatus({ qty }) {
             name="outofstock1"
             disabled={true}
             checked={false}
+            readOnly={true}
           />
           <label htmlFor="outofstock">OUT OF STOCK</label>
         </div>
@@ -47,6 +50,7 @@ function StockStatus({ qty }) {
             name="onstock2"
             disabled={true}
             checked={false}
+            readOnly={true}
           />
           <label htmlFor="onstock">ON STOCK</label>
         </div>
@@ -57,6 +61,7 @@ function StockStatus({ qty }) {
             type="checkbox"
             name="lowstock2"
             checked={true}
+            readOnly={true}
           />
           <label htmlFor="lowstock">LOW ON STOCK</label>
         </div>
@@ -67,6 +72,7 @@ function StockStatus({ qty }) {
             name="outofstock2"
             disabled={true}
             checked={false}
+            readOnly={true}
           />
           <label htmlFor="outofstock">OUT OF STOCK</label>
         </div>
@@ -81,6 +87,7 @@ function StockStatus({ qty }) {
             name="onstock3"
             disabled={true}
             checked={false}
+            readOnly={true}
           />
           <label htmlFor="onstock">ON STOCK</label>
         </div>
@@ -90,6 +97,7 @@ function StockStatus({ qty }) {
             name="lowstock3"
             disabled={true}
             checked={false}
+            readOnly={true}
           />
           <label htmlFor="lowstock">LOW ON STOCK</label>
         </div>
@@ -99,6 +107,7 @@ function StockStatus({ qty }) {
             type="checkbox"
             name="outofstock3"
             checked={true}
+            readOnly={true}
             // disabled={true}
           />
           <label htmlFor="outofstock">OUT OF STOCK</label>
