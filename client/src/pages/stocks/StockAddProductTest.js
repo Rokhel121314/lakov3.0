@@ -25,7 +25,11 @@ function StockAddProductTest() {
       {/* PREVIEW IMAGE */}
       <div className={styles["addstock-images"]}>
         {!formData.product_image ? (
-          ""
+          <img
+            className={styles["uploaded-preview"]}
+            src="https://res.cloudinary.com/jerickwebdev/image/upload/v1678356613/default_product_tpkmfs.png"
+            alt="img"
+          />
         ) : (
           <img
             className={styles["uploaded-preview"]}
@@ -43,7 +47,7 @@ function StockAddProductTest() {
           dispatch(addProduct(dispatchData));
           setTimeout(() => {
             resetFormdata();
-          }, 1000);
+          }, 500);
         }}>
         {/* PRODUCT NAME */}
         <div className={styles["addstock-inputcontainer"]}>
@@ -126,7 +130,10 @@ function StockAddProductTest() {
 
         {/* SAVE PRODUCT BUTTON */}
         <div className={styles["addstock-buttoncontainer"]}>
-          <button className={styles["addstock-button"]} type="submit">
+          <button
+            className={styles["addstock-button"]}
+            type="submit"
+            disabled={isLoading ? true : false}>
             {isLoading ? "...SAVING PRODUCT" : "SAVE PRODUCT"}
           </button>
         </div>
