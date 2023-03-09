@@ -1,17 +1,41 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./stock.module.css";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import StockStatus from "./StockStatus";
+import {
+  deleteProduct,
+  getNextProductDetail,
+  readAllProduct,
+} from "../../redux/productSlice";
+import useLogin from "../../hooks/useLogin";
+import useCapitalize from "../../hooks/useCapitalize";
 
 function StockDetail() {
-  const { productDetail } = useSelector((state) => state.product);
+  const { productDetail, productIndex } = useSelector((state) => state.product);
 
-  const ProductName =
-    productDetail.product_name.charAt(0).toUpperCase() +
-    productDetail.product_name.slice(1);
+  const dispatch = useDispatch();
 
-  console.log("PRODUCTNAME", ProductName);
+  const { persistUserData } = useLogin();
+  const productAndUserId = {
+    user_id: persistUserData.user_id,
+    product_id: productDetail._id,
+  };
+
+  const { newWord } = useCapitalize(productDetail.product_name);
+  const newProductName = newWord;
+  console.log("word", newWord);
+
+  const handleDeleteProduct = () => {
+    dispatch(deleteProduct(productAndUserId));
+
+    setTimeout(() => {
+      dispatch(readAllProduct(persistUserData.user_id));
+    }, 500);
+
+    dispatch(getNextProductDetail(productIndex));
+  };
+
   return (
     <div className={styles["stockdetail-container"]}>
       <div className={styles["stockdetail-header"]}>
@@ -23,13 +47,15 @@ function StockDetail() {
         </button>
         <button className={styles["utility-delete-btn"]}>
           <FaTrash />
-          <div className={styles["edit-text"]}>DELETE</div>
+          <div className={styles["edit-text"]} onClick={handleDeleteProduct}>
+            DELETE
+          </div>
         </button>
       </div>
 
       {/* PRODUCT DETAIL */}
       <div className={`${styles["productdetail-container"]}`}>
-        <div className={styles["product-name"]}>{ProductName}</div>
+        <div className={styles["product-name"]}>{newProductName}</div>
         <div className={styles["product-id"]}>{`ID: ${productDetail._id}`}</div>
       </div>
 

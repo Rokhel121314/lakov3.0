@@ -209,95 +209,6 @@ body {
   /* background: greenyellow; */
 }
 
-/* STOCK ADD PRODUCT CSS */
-.add-product-container {
-  width: 35%;
-  height: 100vh;
-}
-
-.add-product-header {
-  height: 10vh;
-  background: white;
-  display: flex;
-  align-items: center;
-}
-
-.add-product-form {
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-evenly; */
-  align-items: center;
-}
-
-.form-container {
-  height: 12vh;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.numberinputs-container {
-  height: 12vh;
-  display: flex;
-  width: 90%;
-  text-align: center;
-  display: flex;
-  align-items: center;
-}
-
-.numberinputs-subcontainer {
-  width: calc(100% * 4 / 12);
-}
-
-.image-container {
-  height: 45vh;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.add-product-inputtext {
-  width: 100%;
-  padding: 0.6rem 0;
-  border-radius: 1rem;
-  text-align: center;
-}
-
-.add-product-inputnumber {
-  width: 90%;
-  padding: 0.6rem 0;
-  border-radius: 1rem;
-  text-align: center;
-}
-
-.form-label {
-  text-align: center;
-  font-size: 0.9rem;
-  margin-bottom: 0.2rem;
-}
-
-.image-preview {
-  height: 35vh;
-  width: 35vh;
-}
-
-.button-container {
-  height: 10vh;
-  display: flex;
-  align-items: center;
-}
-
-.saveproduct-button {
-  padding: 0.7rem 2rem;
-  background: green;
-  color: white;
-  border: none;
-  border-radius: 1rem;
-}
-
 /* REMOVE ARROW BUTTON ON INPUT TYPE NUMBERS */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -418,4 +329,116 @@ input::-webkit-inner-spin-button {
 .product-button:hover {
   cursor: pointer;
   background: rgb(249, 242, 242);
+}
+
+/* stockaddproduct test.css */
+.addstock-container {
+  width: 35%;
+  height: 100vh;
+  background: rgb(209, 209, 209);
+  border-right: 1px solid #39c643;
+}
+
+.addstock-header {
+  height: 12vh;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.addstock-images {
+  height: 38vh;
+  background: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploaded-preview {
+  /* border: 1px solid black; */
+  max-height: 30vh;
+  max-width: 30vh;
+  height: 100%;
+  width: 100%;
+}
+
+.addstock-forms {
+  height: 50vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addstock-inputcontainer {
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.addstock-numberinputcontainer {
+  width: 82%;
+  height: 5vh;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.addstock-input {
+  height: 5vh;
+  width: 80%;
+  border: 2px solid #39c643;
+  border-radius: 10px;
+  text-align: center;
+}
+.addstock-numberinput {
+  height: 5vh;
+  width: 45%;
+  border: 2px solid #39c643;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.addstock-inputfile {
+  display: none;
+}
+
+.addstock-filelabel {
+  height: 5vh;
+  width: 80%;
+  border: 2px solid #39c643;
+  border-radius: 10px;
+}
+.addstock-uploadimage {
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+}
+
+.addstock-buttoncontainer {
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.addstock-button {
+  height: 8vh;
+  width: 80%;
+  border: 2px solid #39c643;
+  background: #39c643;
+  color: white;
+  letter-spacing: 1px;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  text-align: center;
 }

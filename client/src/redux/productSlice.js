@@ -37,6 +37,23 @@ export const readAllProduct = createAsyncThunk(
   }
 );
 
+// DELETE PRODUCT FROM DATABASE
+export const deleteProduct = createAsyncThunk(
+  "product/delete",
+  async (productAndUserId) => {
+    const { user_id, product_id } = productAndUserId;
+    try {
+      const { data } = await Axios.delete(
+        `http://localhost:3001/products/${user_id}/${product_id}`,
+        { withCredentials: true }
+      );
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
+
 // CREATING PRODUCT SLICE
 export const productSlice = createSlice({
   name: "product",
@@ -44,12 +61,26 @@ export const productSlice = createSlice({
     productData: [],
     allProductData: [],
     productDetail: [],
+    productIndex: [],
     isLoading: false,
     isSuccess: false,
   },
   reducers: {
     getProductDetail: (state, { payload }) => {
       state.productDetail = payload;
+    },
+    getProductIndex: (state, { payload }) => {
+      state.productIndex = payload;
+    },
+    getNextProductDetail: (state, { payload }) => {
+      if (payload < state.allProductData.length - 1) {
+        state.productDetail = state.allProductData[payload + 1];
+      } else if (state.allProductData.length < 2) {
+        state.productDetail = [];
+      } else {
+        state.productDetail = state.allProductData[0];
+        state.productIndex = 0;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -78,8 +109,21 @@ export const productSlice = createSlice({
       .addCase(readAllProduct.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = false;
+      })
+      .addCase(deleteProduct.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteProduct.fulfilled, (state, { payload }) => {
+        // state.productDetail = payload;
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(deleteProduct.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = false;
       });
   },
 });
-export const { getProductDetail } = productSlice.actions;
+export const { getProductDetail, getProductIndex, getNextProductDetail } =
+  productSlice.actions;
 export default productSlice.reducer;
