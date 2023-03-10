@@ -16,6 +16,9 @@ function StockGridView({ toggleTrueOnly }) {
                 <button
                   className={styles["product-button"]}
                   key={product._id}
+                  onFocus={() => {
+                    dispatch(getProductDetail(product));
+                  }}
                   onClick={() => {
                     toggleTrueOnly();
                     dispatch(getProductDetail(product));

@@ -42,6 +42,9 @@ function StockListView({ toggleTrueOnly }) {
                 return (
                   <button
                     className={styles["product-container"]}
+                    onFocus={() => {
+                      dispatch(getProductDetail(product));
+                    }}
                     onClick={() => {
                       dispatch(getProductDetail(product));
                       dispatch(getProductIndex(index - 1));

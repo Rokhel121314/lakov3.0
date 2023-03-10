@@ -81,7 +81,6 @@ export const productSlice = createSlice({
     productDetail: [],
     productIndex: [],
     isLoading: false,
-    isSuccess: false,
   },
   reducers: {
     getProductDetail: (state, { payload }) => {
@@ -109,12 +108,10 @@ export const productSlice = createSlice({
       .addCase(addProduct.fulfilled, (state, { payload }) => {
         state.productData = payload;
         state.isLoading = false;
-        state.isSuccess = true;
       })
       .addCase(addProduct.rejected, (state, { payload }) => {
         state.productData = payload;
         state.isLoading = false;
-        state.isSuccess = false;
       })
       .addCase(readAllProduct.pending, (state, { payload }) => {
         state.isLoading = true;
@@ -122,11 +119,9 @@ export const productSlice = createSlice({
       .addCase(readAllProduct.fulfilled, (state, { payload }) => {
         state.allProductData = payload;
         state.isLoading = false;
-        state.isSuccess = true;
       })
       .addCase(readAllProduct.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = false;
       })
       .addCase(deleteProduct.pending, (state, { payload }) => {
         state.isLoading = true;
@@ -134,11 +129,9 @@ export const productSlice = createSlice({
       .addCase(deleteProduct.fulfilled, (state, { payload }) => {
         state.productData = payload;
         state.isLoading = false;
-        state.isSuccess = true;
       })
       .addCase(deleteProduct.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = false;
       })
       .addCase(updateProduct.pending, (state, { payload }) => {
         state.isLoading = true;
@@ -146,12 +139,10 @@ export const productSlice = createSlice({
       .addCase(updateProduct.fulfilled, (state, { payload }) => {
         state.productDetail = payload;
         state.productData = payload;
-        state.isSuccess = true;
         state.isLoading = false;
       })
       .addCase(updateProduct.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = false;
       });
   },
 });

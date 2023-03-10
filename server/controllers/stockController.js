@@ -61,10 +61,12 @@ const readAllProduct = async (req, res) => {
 const readProductById = async (req, res) => {
   try {
     const { user_id, product_id } = req.params;
+
     const product = await Stocks.findOne({
       "created_by.user_id": user_id,
       _id: product_id,
     });
+
     if (!product) {
       return res
         .status(400)

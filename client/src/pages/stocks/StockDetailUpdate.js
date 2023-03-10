@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./stock.module.css";
 import { BiImageAdd } from "react-icons/bi";
 import useUpdateProduct from "../../hooks/useUpdateProduct";
-import { readAllProduct, updateProduct } from "../../redux/productSlice";
+import { updateProduct } from "../../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import useLogin from "../../hooks/useLogin";
 
@@ -84,7 +84,7 @@ function StockDetailUpdate({ toggleIsOpen }) {
           />
           <label className={styles["update-input-image"]}>
             <BiImageAdd />
-            TEMP. DISABLED
+            upload image
             <input
               type="file"
               accept="image/*"
