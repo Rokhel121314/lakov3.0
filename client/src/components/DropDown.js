@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 import useClickOutside from "../hooks/useClickOutSide";
 
 function DropDown({ persistUserData, handleLogout }) {
-  const { isOpen, toggle, ref } = useClickOutside(false);
+  const { isOpen, toggleIsOpen, ref } = useClickOutside(false);
 
   return (
     <>
@@ -22,7 +22,7 @@ function DropDown({ persistUserData, handleLogout }) {
           className={
             !isOpen ? styles["user-icon-close"] : styles["user-icon-open"]
           }
-          onClick={toggle}
+          onClick={toggleIsOpen}
         />
         <div
           className={

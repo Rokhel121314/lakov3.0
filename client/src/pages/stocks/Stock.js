@@ -6,7 +6,7 @@ import useToggle from "../../hooks/useToggle";
 import { readAllProduct } from "../../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import useLogin from "../../hooks/useLogin";
-import StockAddProductTest from "./StockAddProductTest";
+import StockAddProduct from "./StockAddProduct";
 
 function Stock() {
   const { value, toggleFalseOnly, toggleTrueOnly } = useToggle();
@@ -21,7 +21,7 @@ function Stock() {
 
   return (
     <div className={styles["stock-container"]}>
-      {value ? <StockDetail /> : <StockAddProductTest />}
+      {value ? <StockDetail /> : <StockAddProduct />}
       <StockDisplay
         addOrShow={value}
         toggleFalseOnly={toggleFalseOnly}

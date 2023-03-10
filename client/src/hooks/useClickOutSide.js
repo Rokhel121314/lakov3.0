@@ -19,7 +19,7 @@ function useClickOutside(initialState = false) {
     };
   });
 
-  return { isOpen, toggle, ref };
+  return { isOpen, toggleIsOpen: toggle, ref };
 }
 
 export default useClickOutside;

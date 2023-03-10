@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../redux/productSlice";
 import useLogin from "../../hooks/useLogin";
 
-function StockAddProductTest() {
+function StockAddProduct() {
   const { formData, handleChange, handleChangeImage, resetFormdata } =
     useAddProduct();
 
@@ -142,4 +142,4 @@ function StockAddProductTest() {
   );
 }
 
-export default StockAddProductTest;
+export default StockAddProduct;

@@ -79,22 +79,57 @@ const readProductById = async (req, res) => {
 };
 
 // UPDATE PRODUCT BY ID ON DATABASE
+
 const updateProduct = async (req, res) => {
   try {
     const { user_id, product_id } = req.params;
-    const product = await Stocks.findOneAndUpdate(
-      { "created_by.user_id": user_id, _id: product_id },
-      req.body,
-      {
-        new: true,
-        runValidators: true,
+    const { product_image, ...formData } = req.body;
+
+    // CHECK IF IMAGE IS BEING UPDATED
+    // IF IMAGES IS BEING UPDATED THIS FUNCTION WILL RUN
+    if (!product_image.asset_id) {
+      const image = await cloudinary.uploader.upload(product_image, {
+        upload_preset: "lako",
+      });
+      if (image) {
+        const product = await Stocks.findOneAndUpdate(
+          {
+            "created_by.user_id": user_id,
+            _id: product_id,
+          },
+          {
+            product_image: image,
+            ...formData,
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+        if (!product) {
+          return res.status(404).json(`No product with id: ${product_id}`);
+        } else {
+          res.status(200).json(product);
+          console.log("updated product");
+        }
       }
-    );
-    if (!product) {
-      return res.status(404).json(`No product with id: ${product_id}`);
-    } else {
-      res.status(200).json(product);
-      console.log("updated product", product);
+    }
+    // IF IMAGE IS NOT BEING UPDATED THIS FUNCTION WILL RUN
+    else {
+      const product = await Stocks.findOneAndUpdate(
+        { "created_by.user_id": user_id, _id: product_id },
+        req.body,
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      if (!product) {
+        return res.status(404).json(`No product with id: ${product_id}`);
+      } else {
+        res.status(200).json(product);
+        console.log("updated product");
+      }
     }
   } catch (error) {
     res.status(500).json({ msg: error.message });

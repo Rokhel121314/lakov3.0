@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useLogin from "../hooks/useLogin";
+import styles from "./styles.module.css";
 import {
   deleteProduct,
   getNextProductDetail,
   readAllProduct,
 } from "../redux/productSlice";
-import styles from "./styles.module.css";
 
 function DeleteConfirmationModal({ newProductName, toggleFalseOnly }) {
   const { productDetail, productIndex } = useSelector((state) => state.product);
@@ -22,9 +22,9 @@ function DeleteConfirmationModal({ newProductName, toggleFalseOnly }) {
   const handleDeleteProduct = () => {
     dispatch(deleteProduct(productAndUserId));
 
-    setTimeout(() => {
-      dispatch(readAllProduct(persistUserData.user_id));
-    }, 500);
+    // setTimeout(() => {
+    //   dispatch(readAllProduct(persistUserData.user_id));
+    // }, 500);
 
     dispatch(getNextProductDetail(productIndex));
   };
