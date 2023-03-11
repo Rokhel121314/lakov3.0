@@ -1,10 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styles from "./stock.module.css";
 import { getProductDetail, getProductIndex } from "../../redux/productSlice";
+import moment from "moment";
 
-function StockListView({ toggleTrueOnly }) {
-  const { allProductData } = useSelector((state) => state.product);
+function StockListView({ toggleTrueOnly, filteredProductData }) {
   const dispatch = useDispatch();
 
   return (
@@ -16,7 +16,7 @@ function StockListView({ toggleTrueOnly }) {
           <div className={`${styles["tableheader-text"]} ${styles["col-1"]}`}>
             #
           </div>
-          <div className={`${styles["tableheader-text"]} ${styles["col-3"]}`}>
+          <div className={`${styles["tableheader-text"]} ${styles["col-2"]}`}>
             PRODUCT IMAGE
           </div>
           <div className={`${styles["tableheader-text"]} ${styles["col-3"]}`}>
@@ -28,7 +28,7 @@ function StockListView({ toggleTrueOnly }) {
           <div className={`${styles["tableheader-text"]} ${styles["col-2"]}`}>
             PRICE
           </div>
-          <div className={`${styles["tableheader-text"]} ${styles["col-2"]}`}>
+          <div className={`${styles["tableheader-text"]} ${styles["col-3"]}`}>
             LAST UPDATED
           </div>
         </div>
@@ -36,9 +36,9 @@ function StockListView({ toggleTrueOnly }) {
         {/* TABLE BODY */}
 
         <div className={styles["stocklist-tablebody"]}>
-          {!allProductData
+          {!filteredProductData
             ? "NO PRODUCT TO DISPLAY"
-            : allProductData.map((product, index) => {
+            : filteredProductData.map((product, index) => {
                 return (
                   <button
                     className={styles["product-container"]}
@@ -56,7 +56,7 @@ function StockListView({ toggleTrueOnly }) {
                       {index++ + 1}
                     </div>
                     <div
-                      className={`${styles["product-text"]} ${styles["col-3"]}`}>
+                      className={`${styles["product-text"]} ${styles["col-2"]}`}>
                       <img
                         className={styles["product-image"]}
                         src={product.product_image.url}
@@ -76,8 +76,8 @@ function StockListView({ toggleTrueOnly }) {
                       {product.selling_price}
                     </div>
                     <div
-                      className={`${styles["product-text"]} ${styles["col-2"]}`}>
-                      {product.updatedAt}
+                      className={`${styles["product-text"]} ${styles["col-3"]}`}>
+                      {moment(product.updatedAt).format("MMM-DD-YYYY")}
                     </div>
                   </button>
                 );

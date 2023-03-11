@@ -79,6 +79,7 @@ export const productSlice = createSlice({
     productData: [],
     allProductData: [],
     productDetail: [],
+    filteredProductData: [],
     productIndex: [],
     isLoading: false,
   },
@@ -86,9 +87,11 @@ export const productSlice = createSlice({
     getProductDetail: (state, { payload }) => {
       state.productDetail = payload;
     },
+
     getProductIndex: (state, { payload }) => {
       state.productIndex = payload;
     },
+
     getNextProductDetail: (state, { payload }) => {
       if (payload < state.allProductData.length - 1) {
         state.productDetail = state.allProductData[payload + 1];
@@ -98,6 +101,24 @@ export const productSlice = createSlice({
         state.productDetail = state.allProductData[0];
         state.productIndex = 0;
       }
+    },
+
+    filterProductData: (state, { payload }) => {
+      state.filteredProductData = state.allProductData.filter((type) => {
+        return type.product_type === payload;
+      });
+    },
+
+    resetFilteredProductData: (state, { payload }) => {
+      state.filteredProductData = state.allProductData;
+    },
+
+    searchFilter: (state, { payload }) => {
+      state.filteredProductData = state.allProductData.filter((product) => {
+        return product.product_name
+          .toLowerCase()
+          .includes(payload.toLowerCase());
+      });
     },
   },
   extraReducers: (builder) => {
@@ -113,16 +134,19 @@ export const productSlice = createSlice({
         state.productData = payload;
         state.isLoading = false;
       })
+
       .addCase(readAllProduct.pending, (state, { payload }) => {
         state.isLoading = true;
       })
       .addCase(readAllProduct.fulfilled, (state, { payload }) => {
         state.allProductData = payload;
+        state.filteredProductData = payload;
         state.isLoading = false;
       })
       .addCase(readAllProduct.rejected, (state, { payload }) => {
         state.isLoading = false;
       })
+
       .addCase(deleteProduct.pending, (state, { payload }) => {
         state.isLoading = true;
       })
@@ -133,6 +157,7 @@ export const productSlice = createSlice({
       .addCase(deleteProduct.rejected, (state, { payload }) => {
         state.isLoading = false;
       })
+
       .addCase(updateProduct.pending, (state, { payload }) => {
         state.isLoading = true;
       })
@@ -146,6 +171,12 @@ export const productSlice = createSlice({
       });
   },
 });
-export const { getProductDetail, getProductIndex, getNextProductDetail } =
-  productSlice.actions;
+export const {
+  getProductDetail,
+  getProductIndex,
+  getNextProductDetail,
+  filterProductData,
+  resetFilteredProductData,
+  searchFilter,
+} = productSlice.actions;
 export default productSlice.reducer;
