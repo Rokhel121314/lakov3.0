@@ -78,7 +78,7 @@ body {
   width: 35%;
   height: 100vh;
   background: rgb(255, 255, 255);
-  border-right: 1px solid #344c57;
+  border-right: 1px solid rgba(219, 219, 219, 0.812);
   position: relative;
 }
 
@@ -170,7 +170,7 @@ body {
 }
 
 .stockdetail-image-container {
-  height: 35vh;
+  height: 50vh;
   width: 100%;
   text-align: center;
 }
@@ -183,7 +183,7 @@ body {
 
 .stock-details {
   width: 100%;
-  height: 10vh;
+  height: 9vh;
   display: flex;
   justify-content: flex-start;
 }
@@ -210,9 +210,78 @@ body {
   text-align: start;
 }
 .stockdetail-statistics {
-  height: 42vh;
+  height: 32vh;
   width: 100%;
-  /* background: greenyellow; */
+  /* background: rgb(251, 225, 225); */
+}
+
+/* STOCK DETAIL UPDATE CSS */
+
+.update-form-header {
+  height: 6vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.update-form-container {
+  height: 26vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.update-input-container {
+  width: 90%;
+  height: 5vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.update-inputfield {
+  width: 46%;
+  border-radius: 5px;
+  border: 2px solid #344c57;
+  text-align: center;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.update-input-image {
+  width: 47%;
+  border-radius: 5px;
+  border: 2px solid #344c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.update-button {
+  padding: 0.6rem 0rem;
+  width: 90%;
+  border: none;
+  background: #344c57;
+  color: white;
+  text-shadow: 1px 1px 5px rgb(26, 23, 23);
+  letter-spacing: 1px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.update-button:hover {
+  background: #364f5b;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
 }
 
 /* REMOVE ARROW BUTTON ON INPUT TYPE NUMBERS */
@@ -222,24 +291,121 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* STOCK DISPLAY CSS */
+/* STOCK DISPLAY CSS STOCK DISPLAY CSS  STOCK DISPLAY CSS STOCK DISPLAY CSS*/
+
 .stocklist-container {
   width: 65%;
   height: 100vh;
 }
 
+/* STOCKSLIST TOOLBAR */
 .stocklist-header {
-  min-height: 10vh;
+  min-height: 15vh;
   width: 100%;
-  background: white;
+  box-shadow: 0px 7px 5px rgb(245 245 245 / 100%);
+}
+
+.stocklist-toolbar-container {
+  height: 8vh;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+}
+
+.stocklist-sort {
+  height: 7vh;
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
+  overflow-x: auto;
+}
+
+.sort-button {
+  border: none;
+  padding: 0.3rem 1rem;
+  border-radius: 1.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin: 0 0.5rem;
+  color: gray;
+}
+
+.sort-button:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 5px rgba(33, 47, 54, 0.2);
+}
+
+.searchbar-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: red; */
+}
+
+.searchbar-container > input {
+  outline: red;
+  font-size: 1.2rem;
+  padding: 0.4rem 0;
+  border: 2px solid #344c57;
+  border-radius: 1.5rem;
+  text-align: center;
+  width: 90%;
+}
+
+.changeview-addproduct-container {
+  width: 50%;
+  height: 100%;
+  /* background: blue; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.changeview-button {
+  border: 3px solid #344c57;
+  border-radius: 8rem;
+  background: none;
+  color: #344c57;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 7rem;
+}
+
+.changeview-button:hover {
+  cursor: pointer;
+  background: #344c57;
+  color: #dee5ee;
+}
+
+.addproduct-button {
+  padding: 0.7rem 2rem;
+  border: none;
+  background: #344c57;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: calc(1rem + 1.4rem);
+}
+
+.addproduct-button:hover {
+  cursor: pointer;
+  background: #dee5ee;
+  color: black;
+}
+
+.addproduct-icon {
+  margin-right: 0.4rem;
 }
 
 /* LIST VIEW CSS */
 .stocklist-section {
-  min-height: 90vh;
+  min-height: 85vh;
   width: 100%;
 }
 
@@ -252,8 +418,20 @@ input::-webkit-inner-spin-button {
 }
 
 .stocklist-tablebody {
-  height: 85vh;
+  height: 80vh;
   overflow-y: auto;
+}
+.stocklist-tablebody::-webkit-scrollbar {
+  width: 5px;
+}
+
+.stocklist-tablebody::-webkit-scrollbar-track {
+  background: #dee5ee;
+  border-radius: 20px;
+}
+.stocklist-tablebody::-webkit-scrollbar-thumb {
+  background-color: #344c57;
+  border-radius: 5px;
 }
 
 .tableheader-text {
@@ -277,7 +455,7 @@ input::-webkit-inner-spin-button {
 }
 
 .product-container:hover {
-  background: rgb(199, 199, 199);
+  background: #dee5ee;
 }
 
 .product-text {
@@ -291,7 +469,7 @@ input::-webkit-inner-spin-button {
 /* GRID VIEW CSS */
 
 .stockgrid-section {
-  max-height: 90vh;
+  max-height: 85vh;
   width: 100%;
 
   display: flex;
@@ -303,6 +481,19 @@ input::-webkit-inner-spin-button {
   justify-content: space-evenly;
   flex-wrap: wrap;
   overflow-y: auto;
+}
+
+.product-button-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.product-button-container::-webkit-scrollbar-track {
+  background: #dee5ee;
+  border-radius: 20px;
+}
+.product-button-container::-webkit-scrollbar-thumb {
+  background-color: #344c57;
+  border-radius: 5px;
 }
 
 .product-button {

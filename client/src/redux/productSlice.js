@@ -54,6 +54,24 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
+// UPDATING PRODUCT FROM DATABASE
+export const updateProduct = createAsyncThunk(
+  "product/update",
+  async (updatedData) => {
+    const { user_id, product_id, formData } = updatedData;
+    try {
+      const { data } = await Axios.put(
+        `http://localhost:3001/products/${user_id}/${product_id}`,
+        formData,
+        { withCredentials: true }
+      );
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
+
 // CREATING PRODUCT SLICE
 export const productSlice = createSlice({
   name: "product",
@@ -61,17 +79,19 @@ export const productSlice = createSlice({
     productData: [],
     allProductData: [],
     productDetail: [],
+    filteredProductData: [],
     productIndex: [],
     isLoading: false,
-    isSuccess: false,
   },
   reducers: {
     getProductDetail: (state, { payload }) => {
       state.productDetail = payload;
     },
+
     getProductIndex: (state, { payload }) => {
       state.productIndex = payload;
     },
+
     getNextProductDetail: (state, { payload }) => {
       if (payload < state.allProductData.length - 1) {
         state.productDetail = state.allProductData[payload + 1];
@@ -82,6 +102,24 @@ export const productSlice = createSlice({
         state.productIndex = 0;
       }
     },
+
+    filterProductData: (state, { payload }) => {
+      state.filteredProductData = state.allProductData.filter((type) => {
+        return type.product_type === payload;
+      });
+    },
+
+    resetFilteredProductData: (state, { payload }) => {
+      state.filteredProductData = state.allProductData;
+    },
+
+    searchFilter: (state, { payload }) => {
+      state.filteredProductData = state.allProductData.filter((product) => {
+        return product.product_name
+          .toLowerCase()
+          .includes(payload.toLowerCase());
+      });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -91,39 +129,54 @@ export const productSlice = createSlice({
       .addCase(addProduct.fulfilled, (state, { payload }) => {
         state.productData = payload;
         state.isLoading = false;
-        state.isSuccess = true;
       })
       .addCase(addProduct.rejected, (state, { payload }) => {
         state.productData = payload;
         state.isLoading = false;
-        state.isSuccess = false;
       })
+
       .addCase(readAllProduct.pending, (state, { payload }) => {
         state.isLoading = true;
       })
       .addCase(readAllProduct.fulfilled, (state, { payload }) => {
         state.allProductData = payload;
+        state.filteredProductData = payload;
         state.isLoading = false;
-        state.isSuccess = true;
       })
       .addCase(readAllProduct.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = false;
       })
+
       .addCase(deleteProduct.pending, (state, { payload }) => {
         state.isLoading = true;
       })
       .addCase(deleteProduct.fulfilled, (state, { payload }) => {
-        // state.productDetail = payload;
+        state.productData = payload;
         state.isLoading = false;
-        state.isSuccess = true;
       })
       .addCase(deleteProduct.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = false;
+      })
+
+      .addCase(updateProduct.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state, { payload }) => {
+        state.productDetail = payload;
+        state.productData = payload;
+        state.isLoading = false;
+      })
+      .addCase(updateProduct.rejected, (state, { payload }) => {
+        state.isLoading = false;
       });
   },
 });
-export const { getProductDetail, getProductIndex, getNextProductDetail } =
-  productSlice.actions;
+export const {
+  getProductDetail,
+  getProductIndex,
+  getNextProductDetail,
+  filterProductData,
+  resetFilteredProductData,
+  searchFilter,
+} = productSlice.actions;
 export default productSlice.reducer;

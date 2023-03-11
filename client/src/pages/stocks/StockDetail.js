@@ -6,22 +6,28 @@ import StockStatus from "./StockStatus";
 import useCapitalize from "../../hooks/useCapitalize";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import useToggle from "../../hooks/useToggle";
+import StockDetailUpdate from "./StockDetailUpdate";
+import useClickOutside from "../../hooks/useClickOutSide";
 
 function StockDetail() {
   const { productDetail } = useSelector((state) => state.product);
 
-  const { newWord } = useCapitalize(productDetail.product_name);
+  const { newWord } = useCapitalize(productDetail?.product_name);
   const newProductName = newWord;
 
   const { value, toggle, toggleFalseOnly } = useToggle();
 
+  const { isOpen, toggleIsOpen, ref } = useClickOutside();
+
   return (
     <>
-      <div className={styles["stockdetail-container"]}>
+      <div className={styles["stockdetail-container"]} ref={ref}>
         <div className={styles["stockdetail-header"]}>
           {/* PRODUCT UTILS */}
 
-          <button className={styles["utility-update-btn"]}>
+          <button
+            className={styles["utility-update-btn"]}
+            onClick={toggleIsOpen}>
             <FaEdit />
             <div className={styles["edit-text"]}>EDIT</div>
           </button>
@@ -78,7 +84,13 @@ function StockDetail() {
         </div>
 
         {/* PRODUCT STATISTICS */}
-        <div className={styles["stockdetail-statistics"]}></div>
+        <div className={styles["stockdetail-statistics"]}>
+          {!isOpen ? (
+            "STATISTICS"
+          ) : (
+            <StockDetailUpdate toggleIsOpen={toggleIsOpen} />
+          )}
+        </div>
       </div>
       {!value ? (
         ""

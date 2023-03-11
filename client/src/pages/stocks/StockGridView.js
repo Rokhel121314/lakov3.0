@@ -1,21 +1,23 @@
 import React from "react";
 import styles from "./stock.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getProductDetail } from "../../redux/productSlice";
 
-function StockGridView({ toggleTrueOnly }) {
-  const { allProductData } = useSelector((state) => state.product);
+function StockGridView({ toggleTrueOnly, filteredProductData }) {
   const dispatch = useDispatch();
   return (
     <section className={styles["stockgrid-section"]}>
       <div className={styles["product-button-container"]}>
-        {!allProductData
+        {!filteredProductData
           ? "NO PRODUCT TO SHOW"
-          : allProductData.map((product) => {
+          : filteredProductData.map((product) => {
               return (
                 <button
                   className={styles["product-button"]}
                   key={product._id}
+                  onFocus={() => {
+                    dispatch(getProductDetail(product));
+                  }}
                   onClick={() => {
                     toggleTrueOnly();
                     dispatch(getProductDetail(product));
