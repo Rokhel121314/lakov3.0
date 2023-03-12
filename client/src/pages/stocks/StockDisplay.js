@@ -6,11 +6,7 @@ import useToggle from "../../hooks/useToggle";
 import { FiGrid, FiList } from "react-icons/fi";
 import { MdAddBusiness } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  filterProductData,
-  resetFilteredProductData,
-  searchFilter,
-} from "../../redux/productSlice";
+import { filterProductData, searchFilter } from "../../redux/productSlice";
 
 function StockDisplay({ addOrShow, toggleFalseOnly, toggleTrueOnly }) {
   const { allProductData, filteredProductData } = useSelector(
@@ -20,7 +16,7 @@ function StockDisplay({ addOrShow, toggleFalseOnly, toggleTrueOnly }) {
   const dispatch = useDispatch();
 
   const productType = allProductData.map((type) => type.product_type);
-  const filterValue = [...new Set(productType)];
+  const filterValue = ["all", ...new Set(productType)];
 
   const { value, toggle } = useToggle();
   return (
@@ -29,6 +25,7 @@ function StockDisplay({ addOrShow, toggleFalseOnly, toggleTrueOnly }) {
       <header className={styles["stocklist-header"]}>
         <div className={styles["stocklist-toolbar-container"]}>
           <div className={styles["changeview-addproduct-container"]}>
+            {/* ADD PRODUCT BUTTON */}
             <button
               className={styles["addproduct-button"]}
               onClick={toggleFalseOnly}
@@ -36,6 +33,8 @@ function StockDisplay({ addOrShow, toggleFalseOnly, toggleTrueOnly }) {
               <MdAddBusiness className={styles["addproduct-icon"]} />
               ADD PRODUCT
             </button>
+
+            {/* CHANGE VIEW BUTTON GRID/LIST */}
             <button className={styles["changeview-button"]} onClick={toggle}>
               {value ? (
                 <>
@@ -48,6 +47,8 @@ function StockDisplay({ addOrShow, toggleFalseOnly, toggleTrueOnly }) {
               )}
             </button>
           </div>
+
+          {/* SEARCH FILTER */}
           <div className={styles["searchbar-container"]}>
             <input
               type="search"
@@ -61,14 +62,6 @@ function StockDisplay({ addOrShow, toggleFalseOnly, toggleTrueOnly }) {
 
         {/* FILTER BUTTONS */}
         <div className={styles["stocklist-sort"]}>
-          <button
-            className={styles["sort-button"]}
-            onClick={(e) => {
-              e.preventDefault();
-              dispatch(resetFilteredProductData());
-            }}>
-            all
-          </button>
           {filterValue.map((value, index) => {
             return (
               <button

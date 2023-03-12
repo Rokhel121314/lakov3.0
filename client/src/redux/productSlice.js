@@ -104,9 +104,13 @@ export const productSlice = createSlice({
     },
 
     filterProductData: (state, { payload }) => {
-      state.filteredProductData = state.allProductData.filter((type) => {
-        return type.product_type === payload;
-      });
+      if (payload === "all") {
+        state.filteredProductData = state.allProductData;
+      } else {
+        state.filteredProductData = state.allProductData.filter((type) => {
+          return type.product_type === payload;
+        });
+      }
     },
 
     resetFilteredProductData: (state, { payload }) => {
