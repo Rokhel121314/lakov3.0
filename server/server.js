@@ -13,6 +13,10 @@ const userRoutes = require("./routes/userRoutes");
 const Stock = require("./models/stockModel");
 const stockRoutes = require("./routes/stockRoutes");
 
+// imports for transaction
+const Transaction = require("./models/transactionModel");
+const transactionRoutes = require("./routes/transactionRoutes");
+
 const app = express();
 
 // MIDDLE WARES
@@ -24,6 +28,7 @@ app.use(cookieParser());
 app.use(cors({ credentials: true, origin: true }));
 app.use(stockRoutes);
 app.use(userRoutes);
+app.use(transactionRoutes);
 
 const PORT = process.env.PORT || 3001;
 
