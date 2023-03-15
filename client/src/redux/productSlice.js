@@ -72,6 +72,26 @@ export const updateProduct = createAsyncThunk(
   }
 );
 
+// UPDATE PRODUCT QUANTITY UPON SUCCESSFULL TRANSACTION
+export const updateProductQty = createAsyncThunk(
+  "product/updateQuantity",
+  async (updateProductData) => {
+    const { user_id, counterItems } = updateProductData;
+    try {
+      const { data } = await Axios.put(
+        `http://localhost:3001/products/${user_id}`,
+        counterItems,
+        { withCredentials: true }
+      );
+
+      return data;
+    } catch (error) {
+      console.log("counterItems", counterItems);
+      console.log("error", error);
+    }
+  }
+);
+
 // CREATING PRODUCT SLICE
 export const productSlice = createSlice({
   name: "product",
@@ -171,6 +191,17 @@ export const productSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateProduct.rejected, (state, { payload }) => {
+        state.isLoading = false;
+      })
+      .addCase(updateProductQty.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProductQty.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.productData = [""];
+      })
+
+      .addCase(updateProductQty.rejected, (state, { payload }) => {
         state.isLoading = false;
       });
   },

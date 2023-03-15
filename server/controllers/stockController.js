@@ -1,6 +1,8 @@
 const Stocks = require("../models/stockModel");
 const User = require("../models/userModel");
 const cloudinary = require("../cloudinary/cloudinary");
+const { findOneAndUpdate } = require("../models/userModel");
+const { default: mongoose } = require("mongoose");
 
 // ADDING/CREATING PRODUCT TO DATABASE
 
@@ -157,10 +159,36 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+// UPDATE PRODUCT QTY UPON ORDER
+const updateStockOnPurchase = async (req, res) => {
+  const { user_id } = req.params;
+  const counterItems = req.body;
+
+  try {
+    User.findById(user_id).then(async () => {
+      const promise = counterItems?.map((product) => {
+        return Stocks.updateMany(
+          { _id: product._id },
+          {
+            $inc: { product_quantity: -product.item_quantity },
+          }
+        );
+      });
+      await Promise.all(promise);
+      res.status(200).json("test");
+      console.log("stocks updated");
+    });
+  } catch (error) {
+    res.status(500).json({ msg: error.message, counterItems });
+    console.log("error", error);
+  }
+};
+
 module.exports = {
   createProduct,
   readAllProduct,
   readProductById,
   updateProduct,
   deleteProduct,
+  updateStockOnPurchase,
 };

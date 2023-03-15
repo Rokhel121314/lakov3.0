@@ -60,7 +60,10 @@ body {
 .poscounter-container {
   width: 35%;
   height: 100vh;
-  background: gray;
+  border-right: 1px solid #344c57;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* POS PRODUCTS CSS */
@@ -178,7 +181,6 @@ body {
 
 .tableheader-text {
   font-size: 0.8rem;
-  color: gray;
   text-align: center;
 }
 
@@ -273,17 +275,50 @@ body {
 /* POS COUNTER CSS */
 
 .counter-header {
-  width: 100%;
+  width: 90%;
   height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.reset-button {
+  border: none;
+  display: flex;
+  font-size: 0.7rem;
+  padding: 0.4rem 1rem;
+  border-radius: calc((0.4rem * 2) + 0.7rem);
+  background: #344c57;
+  color: white;
+}
+
+.reset-button:hover {
+  cursor: pointer;
+  background: #dee5ee;
+  color: black;
 }
 
 .counter-body {
   width: 100%;
   height: 60vh;
   background: white;
+  overflow-y: auto;
+}
+
+.counter-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.counter-body::-webkit-scrollbar-track {
+  background: #dee5ee;
+  border-radius: 20px;
+}
+.counter-body::-webkit-scrollbar-thumb {
+  background-color: #344c57;
+  border-radius: 5px;
 }
 
 .counter-items {
@@ -304,10 +339,11 @@ body {
 .counter-item-name {
   width: 30%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-size: 0.9rem;
   font-weight: 500;
+  margin-left: 0.2rem;
 }
 
 .counter-item-count {
@@ -372,9 +408,55 @@ body {
 .counter-summary {
   width: 100%;
   height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Roboto Mono", monospace;
+}
+
+.counter-border {
+  width: 90%;
+  border: 1px solid #344c57;
+}
+.summary-container {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.payment-input {
+  align-self: flex-end;
+  width: 4rem;
+  font-family: "Roboto Mono", monospace;
+  text-align: end;
+  font-size: 0.9rem;
 }
 
 .counter-submit-button {
   width: 100%;
   height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-button {
+  width: 90%;
+  height: 7vh;
+  border: none;
+  background: #344c57;
+  color: white;
+  text-shadow: 1px 1px 5px rgb(26, 23, 23);
+  letter-spacing: 1px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background: #364f5b;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
 }
