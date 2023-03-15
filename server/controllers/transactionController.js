@@ -43,7 +43,7 @@ const readAllTransactions = async (req, res) => {
       "created_by.user_id": user_id,
     });
     res.status(200).json(transactions);
-    console.log("reading all transactions", transactions._id);
+    console.log("reading all transactions");
   } catch (error) {
     res.status(500).json({ msg: error.message });
     console.log("error", error);

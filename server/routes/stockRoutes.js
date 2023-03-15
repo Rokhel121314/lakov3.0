@@ -6,9 +6,10 @@ const {
   readProductById,
   updateProduct,
   deleteProduct,
+  updateStockOnPurchase,
 } = require("../controllers/stockController");
 const { validateToken } = require("../jwt/jwt");
-const Stock = require("../models/stockModel");
+const Stocks = require("../models/stockModel");
 
 const router = express.Router();
 
@@ -26,5 +27,8 @@ router.put("/products/:user_id/:product_id", validateToken, updateProduct);
 
 // DELETE PRODUCT
 router.delete("/products/:user_id/:product_id", validateToken, deleteProduct);
+
+// UPDATE PRODUCT UPON SUCCESSFULL TRANSACTION
+router.put("/products/:user_id", validateToken, updateStockOnPurchase);
 
 module.exports = router;

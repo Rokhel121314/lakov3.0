@@ -129,6 +129,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-family: "Roboto Mono", monospace;
 }
 
 .product-name {
@@ -155,6 +156,7 @@ body {
 .status-container {
   display: flex;
   align-items: center;
+  font-family: "Roboto Mono", monospace;
 }
 
 .checkbox-onstock {
