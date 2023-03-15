@@ -142,7 +142,13 @@ function PosCounter() {
       </div>
       <div className={styles["counter-submit-button"]}>
         <button
-          disabled={!counterItems.length ? true : false}
+          disabled={
+            paymentAmount === 0
+              ? true
+              : paymentAmount >= totalPrice
+              ? false
+              : true
+          }
           className={styles["submit-button"]}
           onClick={(e) => {
             e.preventDefault();
