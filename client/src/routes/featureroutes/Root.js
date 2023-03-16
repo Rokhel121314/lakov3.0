@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./root.module.css";
 import { NavLink, Outlet } from "react-router-dom";
 import ProtectedRoute from "../../hooks/ProtectedRoute";
 import useLogin from "../../hooks/useLogin";
+import { readAllTransactions } from "../../redux/transactionSlice";
+import { readAllProduct } from "../../redux/productSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Root() {
   const { handleLogout, persistUserData } = useLogin();
-  console.log("persist", persistUserData);
+
+  const { productData } = useSelector((state) => state.product);
+  const { addedTransaction } = useSelector((state) => state.transaction);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(readAllProduct(persistUserData.user_id));
+    dispatch(readAllTransactions(persistUserData.user_id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productData, addedTransaction]);
   return (
     <>
       <div className={styles["root-container"]}>

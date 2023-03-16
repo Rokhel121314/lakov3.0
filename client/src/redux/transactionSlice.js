@@ -39,11 +39,30 @@ export const transactionSlice = createSlice({
   initialState: {
     addedTransaction: [],
     transactionList: [],
+    filteredTransactionList: [],
     transactionDetail: [],
     sortedTransaction: [],
+    totalTransactionQuantity: [],
+    totalTransactionAmount: [],
+    totalTransactions: 0,
     isLoading: false,
   },
-  reducers: {},
+  reducers: {
+    getTransactionDetail: (state, { payload }) => {
+      state.transactionDetail = payload;
+    },
+    getTransactionTotals: (state, { payload }) => {
+      state.totalTransactionQuantity = state.transactionList
+        .map((product) => product.transaction_sold_quantity)
+        .reduce((a, b) => a + b, 0);
+
+      state.totalTransactionAmount = state.transactionList
+        .map((product) => product.transaction_sold_amount)
+        .reduce((a, b) => a + b, 0);
+
+      state.totalTransactions = state.transactionList.length;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createTransaction.pending, (state, { payload }) => {
@@ -61,6 +80,7 @@ export const transactionSlice = createSlice({
       })
       .addCase(readAllTransactions.fulfilled, (state, { payload }) => {
         state.transactionList = payload;
+        state.transactionDetail = payload[0];
         state.isLoading = false;
       })
       .addCase(readAllTransactions.rejected, (state, { payload }) => {
@@ -69,4 +89,6 @@ export const transactionSlice = createSlice({
   },
 });
 
+export const { getTransactionDetail, getTransactionTotals } =
+  transactionSlice.actions;
 export default transactionSlice.reducer;

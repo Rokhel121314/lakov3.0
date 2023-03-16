@@ -7,7 +7,7 @@ export const counterSlice = createSlice({
     onCounter: [],
     totalQuantity: 0,
     totalPrice: 0,
-    paymentAmount: 0,
+    paymentAmount: "",
     paymentChange: 0,
   },
   reducers: {
@@ -77,6 +77,13 @@ export const counterSlice = createSlice({
       state.counterItems = state.counterItems.filter(
         (product) => payload._id !== product._id
       );
+      state.totalQuantity = state.counterItems
+        .map((product) => product.item_quantity)
+        .reduce((a, b) => a + b, 0);
+
+      state.totalPrice = state.counterItems
+        .map((product) => product.item_quantity * product.selling_price)
+        .reduce((a, b) => a + b, 0);
     },
 
     getPayment: (state, { payload }) => {

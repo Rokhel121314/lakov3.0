@@ -4,6 +4,46 @@
 @import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&family=Playfair+Display:wght@800&display=swap");
 /* font-family: 'Playfair Display', serif; */
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+/* font-family: 'Roboto Mono', monospace; */
+
+.col-1 {
+  width: calc(100% * (1 / 12));
+}
+.col-2 {
+  width: calc(100% * (2 / 12));
+}
+.col-3 {
+  width: calc(100% * (3 / 12));
+}
+.col-4 {
+  width: calc(100% * (4 / 12));
+}
+.col-5 {
+  width: calc(100% * (5 / 12));
+}
+.col-6 {
+  width: calc(100% * (6 / 12));
+}
+.col-7 {
+  width: calc(100% * (7 / 12));
+}
+.col-8 {
+  width: calc(100% * (8 / 12));
+}
+.col-9 {
+  width: calc(100% * (9 / 12));
+}
+.col-10 {
+  width: calc(100% * (10 / 12));
+}
+.col-11 {
+  width: calc(100% * (11 / 12));
+}
+.col-12 {
+  width: calc(100% * (12 / 12));
+}
+
 body {
   margin: 0;
 }
@@ -12,4 +52,226 @@ body {
   height: 100vh;
   width: 85%;
   float: right;
+  color: black;
+  display: flex;
+}
+
+/* TRANSACTION DETAIL CSS */
+.detail-container {
+  width: 35%;
+  min-height: 100vh;
+  border-right: 1px solid gray;
+  overflow-y: auto;
+  font-family: "Roboto Mono", monospace;
+}
+
+.detail-container::-webkit-scrollbar {
+  width: 1px;
+}
+
+.detail-container .detail-container::-webkit-scrollbar-track {
+  background: #dee5ee;
+  border-radius: 20px;
+}
+.detail-container::-webkit-scrollbar-thumb {
+  background-color: #344c57;
+  border-radius: 1px;
+}
+
+.detail-header {
+  min-height: 15vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  /* background: gray; */
+}
+
+.store-name {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.sub-detail {
+  font-size: 0.9rem;
+}
+
+.detail-body {
+  min-height: 85vh;
+  width: 100%;
+}
+
+.product-header {
+  display: flex;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.2rem;
+  border-bottom: 1px dotted gray;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+  padding-bottom: 0.3rem;
+}
+
+.product-container {
+  width: 100%;
+  padding: 0.3rem 0rem;
+}
+
+.item-name-total {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.item-name {
+  margin-left: 1rem;
+}
+
+.item-total {
+  margin-right: 1rem;
+}
+
+.qty-price-detail {
+  font-size: 0.9rem;
+  font-weight: 200;
+  margin-left: 3rem;
+}
+
+.detail-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  /* border-top: 1px dotted gray; */
+  padding-top: 0.3rem;
+}
+
+.spacer {
+  width: 100%;
+  border-bottom: 1px dotted gray;
+}
+
+.print-button {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.print-button > button {
+  width: 90%;
+  height: 8vh;
+  font-size: 1.6rem;
+  border: none;
+  background: #344c57;
+  color: white;
+  text-shadow: 1px 1px 5px rgb(26, 23, 23);
+  letter-spacing: 1px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.print-button > button:hover {
+  background: #364f5b;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* TRANSACTION DISPLAY CSS */
+
+.display-container {
+  width: 65%;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.display-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.display-container::-webkit-scrollbar-track {
+  background: #dee5ee;
+  border-radius: 20px;
+}
+.display-container::-webkit-scrollbar-thumb {
+  background-color: #344c57;
+  border-radius: 5px;
+}
+
+.display-header {
+  height: 10vh;
+  width: 100%;
+  box-shadow: 0px 7px 5px rgb(245 245 245 / 100%);
+}
+
+.total-summary {
+  height: 10vh;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}
+
+.transaction-toolbar {
+  height: 10vh;
+  width: 70%;
+}
+
+.display-body {
+  height: 90vh;
+  width: 100%;
+}
+
+.table-header {
+  height: 5vh;
+  width: 100%;
+  font-size: 0.8rem;
+  color: gray;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.table-body {
+  overflow-y: auto;
+  height: 85vh;
+}
+
+.table-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.table-body::-webkit-scrollbar-track {
+  background: #dee5ee;
+  border-radius: 20px;
+}
+.table-body::-webkit-scrollbar-thumb {
+  background-color: #344c57;
+  border-radius: 5px;
+}
+
+.data-container {
+  width: 100%;
+  border: none;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.8rem 0rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.data-container:hover {
+  background: #dee5ee;
 }
