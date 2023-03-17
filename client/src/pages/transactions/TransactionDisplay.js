@@ -5,7 +5,21 @@ import moment from "moment";
 import {
   getTransactionDetail,
   getTransactionTotals,
+  sortBySoldAmountAsc,
+  sortBySoldAmountDsc,
+  sortBySoldQtyAsc,
+  sortBySoldQtyDsc,
+  sortBySoldDateAsc,
+  sortBySoldDateDsc,
+  searchFilter,
 } from "../../redux/transactionSlice";
+import DateRangeTest from "./DateRangeTest";
+import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
+import { ImSearch } from "react-icons/im";
+import useToggle from "../../hooks/useToggle";
+import useToggle2 from "../../hooks/useToggle2";
+import useToggle3 from "../../hooks/useToggle3";
+import { format } from "date-fns";
 
 function TransactionDisplay() {
   const {
@@ -13,39 +27,151 @@ function TransactionDisplay() {
     totalTransactionQuantity,
     totalTransactionAmount,
     totalTransactions,
+    filteredTransactionList,
   } = useSelector((state) => state.transaction);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTransactionTotals());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [transactionList]);
+  }, [transactionList, filteredTransactionList]);
+
+  const { value, toggle, toggleFalseOnly } = useToggle();
+  const { value2, toggle2, toggleFalseOnly2 } = useToggle2();
+  const { value3, toggle3, toggleFalseOnly3 } = useToggle3();
+
+  console.log(
+    "test",
+    transactionList.map((transaction) =>
+      format(new Date(transaction.createdAt), "MM/dd/yyyy")
+    )
+  );
 
   return (
     <div className={styles["display-container"]}>
       <div className={styles["display-header"]}>
-        <div className={styles["total-summary"]}>
-          <div>{`${totalTransactions} TRANSACTIONS`}</div>
-          <div>{`${totalTransactionQuantity?.toFixed(2)} pcs`}</div>
-          <div>{`$ ${totalTransactionAmount.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-          })}`}</div>
+        <div className={styles["transaction-toolbar"]}>
+          <div className={styles["search-input-container"]}>
+            <input
+              name="search-input-label"
+              className={styles["search-input"]}
+              type="search"
+              placeholder="search transaction id here.."
+              onChange={(e) => {
+                dispatch(searchFilter(e.target.value));
+              }}
+            />
+            <button className={styles["search-button"]} disabled={true}>
+              <ImSearch className={styles["search-icon"]} />
+            </button>
+          </div>
+
+          <DateRangeTest />
         </div>
-        <div className={styles["transaction-toolbar"]}></div>
+        <div className={styles["total-summary"]}>
+          <div>{`TRANSACTIONS: ${totalTransactions}`}</div>
+          <div>{`SOLD QUANTITY: ${totalTransactionQuantity.toLocaleString(
+            undefined,
+            {
+              minimumFractionDigits: 2,
+            }
+          )} pcs`}</div>
+          <div>{`SOLD AMOUNT: $ ${totalTransactionAmount.toLocaleString(
+            undefined,
+            {
+              minimumFractionDigits: 2,
+            }
+          )}`}</div>
+        </div>
       </div>
       <div className={styles["display-body"]}>
         <div className={styles["table-header"]}>
           <div className={`${styles["col-1"]}`}>#</div>
           <div className={`${styles["col-4"]}`}>TRANSACTION ID</div>
-          <div className={`${styles["col-2"]}`}>SOLD QUANTITY</div>
-          <div className={`${styles["col-2"]}`}>SOLD AMOUNT</div>
-          <div className={`${styles["col-3"]}`}>TRANSACTION DATE</div>
+
+          {/* SORTING BY SOLD QUANTITY */}
+          <div className={`${styles["col-2"]}`}>
+            SOLD QUANTITY
+            {!value ? (
+              <MdOutlineArrowDropDown
+                className={styles["sort-icons"]}
+                onClick={() => {
+                  dispatch(sortBySoldQtyAsc());
+                  toggle();
+                  toggleFalseOnly2();
+                  toggleFalseOnly3();
+                }}
+              />
+            ) : (
+              <MdOutlineArrowDropUp
+                className={styles["sort-icons"]}
+                onClick={() => {
+                  dispatch(sortBySoldQtyDsc());
+                  toggle();
+                  toggleFalseOnly2();
+                  toggleFalseOnly3();
+                }}
+              />
+            )}
+          </div>
+
+          {/* SORTING BY SOLD AMOUNT */}
+          <div className={`${styles["col-2"]}`}>
+            SOLD AMOUNT
+            {!value2 ? (
+              <MdOutlineArrowDropDown
+                className={styles["sort-icons"]}
+                onClick={() => {
+                  dispatch(sortBySoldAmountAsc());
+                  toggle2();
+                  toggleFalseOnly();
+                  toggleFalseOnly3();
+                }}
+              />
+            ) : (
+              <MdOutlineArrowDropUp
+                className={styles["sort-icons"]}
+                onClick={() => {
+                  dispatch(sortBySoldAmountDsc());
+                  toggle2();
+                  toggleFalseOnly();
+                  toggleFalseOnly3();
+                }}
+              />
+            )}
+          </div>
+
+          {/* SORT BY SOLD DATE */}
+          <div className={`${styles["col-3"]}`}>
+            TRANSACTION DATE
+            {!value3 ? (
+              <MdOutlineArrowDropDown
+                className={styles["sort-icons"]}
+                onClick={() => {
+                  dispatch(sortBySoldDateAsc());
+                  toggle3();
+                  toggleFalseOnly();
+                  toggleFalseOnly2();
+                }}
+              />
+            ) : (
+              <MdOutlineArrowDropUp
+                className={styles["sort-icons"]}
+                onClick={() => {
+                  dispatch(sortBySoldDateDsc());
+                  toggle3();
+                  toggleFalseOnly();
+                  toggleFalseOnly2();
+                }}
+              />
+            )}
+          </div>
         </div>
         <div className={styles["table-body"]}>
-          {!transactionList ? (
+          {!filteredTransactionList ? (
             <div>NO TRANSACTION TO DISPLAY</div>
           ) : (
-            transactionList?.map((transaction, index) => {
+            filteredTransactionList?.map((transaction, index) => {
               return (
                 <button
                   className={styles["data-container"]}
