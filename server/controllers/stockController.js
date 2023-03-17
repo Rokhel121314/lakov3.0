@@ -175,7 +175,7 @@ const updateStockOnPurchase = async (req, res) => {
         );
       });
       await Promise.all(promise);
-      res.status(200).json("test");
+      res.status(200).json("success");
       console.log("stocks updated");
     });
   } catch (error) {

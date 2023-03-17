@@ -36,7 +36,7 @@ function useLogin() {
       dispatch(resetUserData());
       setTimeout(() => {
         navigate("/login");
-      }, 1000);
+      }, 0);
     } catch (error) {
       console.log("error", error);
     }

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Axios from "axios";
+import format from "date-fns/format";
 
 // CREATE TRANSACTION/ SUBMIT ORDER
 export const createTransaction = createAsyncThunk(
@@ -39,11 +40,90 @@ export const transactionSlice = createSlice({
   initialState: {
     addedTransaction: [],
     transactionList: [],
+    filteredTransactionList: [],
     transactionDetail: [],
     sortedTransaction: [],
+    totalTransactionQuantity: [],
+    totalTransactionAmount: [],
+    totalTransactions: 0,
     isLoading: false,
   },
-  reducers: {},
+  reducers: {
+    getTransactionDetail: (state, { payload }) => {
+      state.transactionDetail = payload;
+    },
+    getTransactionTotals: (state, { payload }) => {
+      state.totalTransactionQuantity = state.filteredTransactionList
+        .map((product) => product.transaction_sold_quantity)
+        .reduce((a, b) => a + b, 0);
+
+      state.totalTransactionAmount = state.filteredTransactionList
+        .map((product) => product.transaction_sold_amount)
+        .reduce((a, b) => a + b, 0);
+
+      state.totalTransactions = state.filteredTransactionList.length;
+    },
+
+    sortBySoldQtyAsc: (state, { payload }) => {
+      state.sortedTransaction = state.filteredTransactionList.sort((a, b) =>
+        a.transaction_sold_quantity > b.transaction_sold_quantity ? -1 : 1
+      );
+    },
+
+    sortBySoldQtyDsc: (state, { payload }) => {
+      state.sortedTransaction = state.filteredTransactionList.sort((a, b) =>
+        a.transaction_sold_quantity > b.transaction_sold_quantity ? 1 : -1
+      );
+    },
+
+    sortBySoldAmountAsc: (state, { payload }) => {
+      state.sortedTransaction = state.filteredTransactionList.sort((a, b) =>
+        a.transaction_sold_amount > b.transaction_sold_amount ? -1 : 1
+      );
+    },
+
+    sortBySoldAmountDsc: (state, { payload }) => {
+      state.sortedTransaction = state.filteredTransactionList.sort((a, b) =>
+        a.transaction_sold_amount > b.transaction_sold_amount ? 1 : -1
+      );
+    },
+
+    sortBySoldDateAsc: (state, { payload }) => {
+      state.sortedTransaction = state.filteredTransactionList.sort((a, b) =>
+        a.createdAt > b.createdAt ? -1 : 1
+      );
+    },
+
+    sortBySoldDateDsc: (state, { payload }) => {
+      state.sortedTransaction = state.filteredTransactionList.sort((a, b) =>
+        a.createdAt > b.createdAt ? 1 : -1
+      );
+    },
+
+    searchFilter: (state, { payload }) => {
+      state.filteredTransactionList = state.transactionList.filter(
+        (transaction) => {
+          return transaction._id.toLowerCase().includes(payload.toLowerCase());
+        }
+      );
+      state.transactionDetail = state.filteredTransactionList[0];
+    },
+
+    filterByDate: (state, { payload }) => {
+      state.filteredTransactionList = state.transactionList?.filter(
+        (transaction) => {
+          const transactionDate = format(
+            new Date(transaction.createdAt),
+            "MM/dd/yyyy"
+          );
+          return (
+            transactionDate >= format(payload[0].startDate, "MM/dd/yyyy") &&
+            transactionDate <= format(payload[0].endDate, "MM/dd/yyyy")
+          );
+        }
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createTransaction.pending, (state, { payload }) => {
@@ -60,7 +140,11 @@ export const transactionSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(readAllTransactions.fulfilled, (state, { payload }) => {
-        state.transactionList = payload;
+        state.transactionList = payload.sort((a, b) =>
+          a.createdAt > b.createdAt ? -1 : 1
+        );
+        state.transactionDetail = payload[0];
+        state.filteredTransactionList = state.transactionList;
         state.isLoading = false;
       })
       .addCase(readAllTransactions.rejected, (state, { payload }) => {
@@ -69,4 +153,16 @@ export const transactionSlice = createSlice({
   },
 });
 
+export const {
+  getTransactionDetail,
+  getTransactionTotals,
+  sortBySoldAmountAsc,
+  sortBySoldAmountDsc,
+  sortBySoldQtyAsc,
+  sortBySoldQtyDsc,
+  sortBySoldDateAsc,
+  sortBySoldDateDsc,
+  searchFilter,
+  filterByDate,
+} = transactionSlice.actions;
 export default transactionSlice.reducer;

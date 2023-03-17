@@ -27,7 +27,7 @@ function StockAddProduct() {
         {!formData.product_image ? (
           <img
             className={styles["uploaded-preview"]}
-            src="https://res.cloudinary.com/jerickwebdev/image/upload/v1678356613/default_product_tpkmfs.png"
+            src="https://res.cloudinary.com/jerickwebdev/image/upload/v1679018249/default_product_iq3rlk.png"
             alt="img"
           />
         ) : (

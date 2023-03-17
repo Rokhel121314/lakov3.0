@@ -1,0 +1,72 @@
+.filter-container {
+  width: 50%;
+  height: 10vh;
+}
+
+.search-input-container {
+  height: 6vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-container > label {
+  font-size: 0.8rem;
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 80%;
+  border: 3px solid #344c57;
+  border-right: none;
+  padding: 5px;
+  height: 6vh;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9dbfaf;
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  color: #344c57;
+}
+
+.search-button {
+  width: 40px;
+  height: 6vh;
+  border: 1px solid #344c57;
+  background: #344c57;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.search-button:hover {
+  cursor: pointer;
+}
+
+.search-icon {
+  font-size: 0.9rem;
+}
+
+.calendar-container {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+}
+
+.calendar-element {
+  position: absolute;
+  left: 100%;
+  transform: translateX(-100%);
+  top: 40px;
+  border: 1px solid #ccc;
+  z-index: 999;
+}
+/*  */

@@ -170,7 +170,7 @@ body {
   width: 5px;
 }
 
-.list-viewt-tablebody::-webkit-scrollbar-track {
+.list-view-tablebody::-webkit-scrollbar-track {
   background: #dee5ee;
   border-radius: 20px;
 }
@@ -181,6 +181,7 @@ body {
 
 .tableheader-text {
   font-size: 0.8rem;
+  color: gray;
   text-align: center;
 }
 
