@@ -9,6 +9,8 @@ const createTransaction = async (req, res) => {
     const {
       transaction_sold_quantity: transaction_sold_quantity,
       transaction_sold_amount: transaction_sold_amount,
+      transaction_cost_amount: transaction_cost_amount,
+      transaction_profit_amount: transaction_profit_amount,
       transaction_payment_amount: transaction_payment_amount,
       transaction_payment_change: transaction_payment_change,
       transaction_sold_items: transaction_sold_items,
@@ -17,6 +19,8 @@ const createTransaction = async (req, res) => {
       const transaction = await Transaction.create({
         transaction_sold_quantity: transaction_sold_quantity,
         transaction_sold_amount: transaction_sold_amount,
+        transaction_cost_amount: transaction_cost_amount,
+        transaction_profit_amount: transaction_profit_amount,
         transaction_payment_amount: transaction_payment_amount,
         transaction_payment_change: transaction_payment_change,
         transaction_sold_items: transaction_sold_items,

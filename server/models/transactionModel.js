@@ -12,6 +12,14 @@ const transactionSchema = mongoose.Schema(
       type: Number,
       required: [true],
     },
+    transaction_cost_amount: {
+      type: Number,
+      required: [true],
+    },
+    transaction_profit_amount: {
+      type: Number,
+      required: [true],
+    },
     transaction_payment_amount: {
       type: Number,
       required: [true],

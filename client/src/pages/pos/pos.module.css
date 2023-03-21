@@ -132,6 +132,20 @@ body {
   overflow-x: auto;
 }
 
+.pos-filter-product::-webkit-scrollbar {
+  width: 1px;
+  height: 3px;
+}
+.pos-filter-product::-webkit-scrollbar-track {
+  background: #dee5ee;
+  border-radius: 1px;
+}
+.pos-filter-product::-webkit-scrollbar-thumb {
+  background-color: #364f5b;
+  border-radius: 1px;
+  width: 1px;
+}
+
 .filter-button {
   border: none;
   padding: 0.3rem 1rem;

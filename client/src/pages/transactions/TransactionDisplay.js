@@ -19,7 +19,6 @@ import { ImSearch } from "react-icons/im";
 import useToggle from "../../hooks/useToggle";
 import useToggle2 from "../../hooks/useToggle2";
 import useToggle3 from "../../hooks/useToggle3";
-import { format } from "date-fns";
 
 function TransactionDisplay() {
   const {
@@ -39,13 +38,6 @@ function TransactionDisplay() {
   const { value, toggle, toggleFalseOnly } = useToggle();
   const { value2, toggle2, toggleFalseOnly2 } = useToggle2();
   const { value3, toggle3, toggleFalseOnly3 } = useToggle3();
-
-  console.log(
-    "test",
-    transactionList.map((transaction) =>
-      format(new Date(transaction.createdAt), "MM/dd/yyyy")
-    )
-  );
 
   return (
     <div className={styles["display-container"]}>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { resetUserData } from "../redux/userSlice";
+import { resetCounter } from "../redux/counterSlice";
 
 function useLogin() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function useLogin() {
       setStatus("LOGGED OUT");
       localStorage.removeItem("userData");
       dispatch(resetUserData());
+      dispatch(resetCounter());
       setTimeout(() => {
         navigate("/login");
       }, 0);

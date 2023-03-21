@@ -21,7 +21,6 @@ function DateRangeTest() {
   ]);
 
   const { isOpen, toggleIsOpen, ref } = useClickOutSide();
-  console.log("range", format(range[0].startDate, "MM/dd/yyyy"));
 
   const dispatch = useDispatch();
 
