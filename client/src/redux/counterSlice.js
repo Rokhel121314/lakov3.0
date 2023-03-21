@@ -6,7 +6,9 @@ export const counterSlice = createSlice({
     counterItems: [],
     onCounter: [],
     totalQuantity: 0,
-    totalPrice: 0,
+    totalSellingPrice: 0,
+    totalOriginalPrice: 0,
+    totalProfit: 0,
     paymentAmount: "",
     paymentChange: 0,
   },
@@ -39,9 +41,15 @@ export const counterSlice = createSlice({
           .map((product) => product.item_quantity)
           .reduce((a, b) => a + b, 0);
 
-        state.totalPrice = state.counterItems
+        state.totalSellingPrice = state.counterItems
           .map((product) => product.item_quantity * product.selling_price)
           .reduce((a, b) => a + b, 0);
+
+        state.totalOriginalPrice = state.counterItems
+          .map((product) => product.item_quantity * product.original_price)
+          .reduce((a, b) => a + b, 0);
+
+        state.totalProfit = state.totalSellingPrice - state.totalOriginalPrice;
       } else return;
     },
 
@@ -68,9 +76,15 @@ export const counterSlice = createSlice({
         .map((product) => product.item_quantity)
         .reduce((a, b) => a + b, 0);
 
-      state.totalPrice = state.counterItems
+      state.totalSellingPrice = state.counterItems
         .map((product) => product.item_quantity * product.selling_price)
         .reduce((a, b) => a + b, 0);
+
+      state.totalOriginalPrice = state.counterItems
+        .map((product) => product.item_quantity * product.original_price)
+        .reduce((a, b) => a + b, 0);
+
+      state.totalProfit = state.totalSellingPrice - state.totalOriginalPrice;
     },
 
     removeProductFromCounter: (state, { payload }) => {
@@ -81,19 +95,27 @@ export const counterSlice = createSlice({
         .map((product) => product.item_quantity)
         .reduce((a, b) => a + b, 0);
 
-      state.totalPrice = state.counterItems
+      state.totalSellingPrice = state.counterItems
         .map((product) => product.item_quantity * product.selling_price)
         .reduce((a, b) => a + b, 0);
+
+      state.totalOriginalPrice = state.counterItems
+        .map((product) => product.item_quantity * product.original_price)
+        .reduce((a, b) => a + b, 0);
+
+      state.totalProfit = state.totalSellingPrice - state.totalOriginalPrice;
     },
 
     getPayment: (state, { payload }) => {
       state.paymentAmount = payload;
-      state.paymentChange = state.paymentAmount - state.totalPrice;
+      state.paymentChange = state.paymentAmount - state.totalSellingPrice;
     },
     resetCounter: (state, { payload }) => {
       state.counterItems = [];
       state.totalQuantity = 0;
-      state.totalPrice = 0;
+      state.totalSellingPrice = 0;
+      state.totalOriginalPrice = 0;
+      state.totalProfit = 0;
       state.paymentAmount = "";
       state.paymentChange = 0;
     },

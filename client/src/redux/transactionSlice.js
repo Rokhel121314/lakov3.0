@@ -45,8 +45,13 @@ export const transactionSlice = createSlice({
     sortedTransaction: [],
     totalTransactionQuantity: [],
     totalTransactionAmount: [],
+    totalTransactionCost: [],
     totalTransactions: 0,
-    isLoading: false,
+    totalTransactionProfit: 0,
+    soldItemsList: [],
+    salesDataByQuantity: [],
+    salesDataByProfit: [],
+    isLoading: true,
   },
   reducers: {
     getTransactionDetail: (state, { payload }) => {
@@ -61,7 +66,74 @@ export const transactionSlice = createSlice({
         .map((product) => product.transaction_sold_amount)
         .reduce((a, b) => a + b, 0);
 
+      state.totalTransactionProfit = state.filteredTransactionList
+        .map((product) => product.transaction_profit_amount)
+        .reduce((a, b) => a + b, 0);
+
+      state.totalTransactionCost = state.filteredTransactionList
+        .map((product) => product.transaction_cost_amount)
+        .reduce((a, b) => a + b, 0);
+
+      state.soldItemsList = state.filteredTransactionList
+        .map((transaction) => transaction.transaction_sold_items)
+        .flat();
+
       state.totalTransactions = state.filteredTransactionList.length;
+    },
+
+    getSalesByQuantity: (state, { payload }) => {
+      state.salesDataByQuantity = [];
+      const filteredSoldProduct = payload.map(
+        (product) =>
+          (state.soldItemsList
+            .filter((sold) => {
+              return sold._id === product._id;
+            })
+            .map((prod) => prod.item_quantity)
+            .reduce((a, b) => a + b, 0) /
+            state.totalTransactionQuantity) *
+          100
+      );
+
+      for (let i = 0; i < filteredSoldProduct.length; i++) {
+        state.salesDataByQuantity.push({
+          product_name: payload[i].product_name,
+          sold_quantity_percentage: parseFloat(filteredSoldProduct[i]),
+        });
+      }
+
+      state.salesDataByQuantity.sort((a, b) =>
+        a.sold_quantity_percentage > b.sold_quantity_percentage ? -1 : 1
+      );
+    },
+
+    getSalesByProfit: (state, { payload }) => {
+      state.salesDataByProfit = [];
+      const filteredSoldProduct = payload.map(
+        (product) =>
+          (state.soldItemsList
+            .filter((sold) => {
+              return sold._id === product._id;
+            })
+            .map(
+              (prod) =>
+                prod.item_quantity * (prod.selling_price - prod.original_price)
+            )
+            .reduce((a, b) => a + b, 0) /
+            state.totalTransactionAmount) *
+          100
+      );
+
+      for (let i = 0; i < filteredSoldProduct.length; i++) {
+        state.salesDataByProfit.push({
+          product_name: payload[i].product_name,
+          sold_profit_percentage: parseFloat(filteredSoldProduct[i]),
+        });
+      }
+
+      state.salesDataByProfit.sort((a, b) =>
+        a.sold_profit_percentage > b.sold_profit_percentage ? -1 : 1
+      );
     },
 
     sortBySoldQtyAsc: (state, { payload }) => {
@@ -122,6 +194,7 @@ export const transactionSlice = createSlice({
           );
         }
       );
+      state.transactionDetail = state.filteredTransactionList[0];
     },
   },
   extraReducers: (builder) => {
@@ -164,5 +237,8 @@ export const {
   sortBySoldDateDsc,
   searchFilter,
   filterByDate,
+  getAllSoldItems,
+  getSalesByQuantity,
+  getSalesByProfit,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

@@ -321,6 +321,21 @@ input::-webkit-inner-spin-button {
   overflow-x: auto;
 }
 
+.stocklist-sort::-webkit-scrollbar {
+  width: 1px;
+  height: 3px;
+}
+
+.stocklist-sort::-webkit-scrollbar-track {
+  background: #dee5ee;
+  border-radius: 1px;
+}
+.stocklist-sort::-webkit-scrollbar-thumb {
+  background-color: #dee5ee;
+  border-radius: 1px;
+  width: 1px;
+}
+
 .sort-button {
   border: none;
   padding: 0.3rem 1rem;

@@ -19,7 +19,9 @@ function PosCounter() {
   const {
     counterItems,
     totalQuantity,
-    totalPrice,
+    totalSellingPrice,
+    totalOriginalPrice,
+    totalProfit,
     paymentAmount,
     paymentChange,
   } = useSelector((state) => state.counter);
@@ -32,7 +34,9 @@ function PosCounter() {
 
   const counterData = {
     transaction_sold_quantity: totalQuantity,
-    transaction_sold_amount: totalPrice,
+    transaction_sold_amount: totalSellingPrice,
+    transaction_cost_amount: totalOriginalPrice,
+    transaction_profit_amount: totalProfit,
     transaction_payment_amount: paymentAmount,
     transaction_payment_change: paymentChange,
     transaction_sold_items: counterItems,
@@ -117,7 +121,7 @@ function PosCounter() {
         </div>
         <div className={styles["summary-container"]}>
           <div>Total</div>
-          <div>$ {totalPrice.toFixed(2)}</div>
+          <div>$ {totalSellingPrice?.toFixed(2)}</div>
         </div>
         <div className={styles["summary-container"]}>
           <div>Payment</div>
@@ -137,7 +141,7 @@ function PosCounter() {
         </div>
         <div className={styles["summary-container"]}>
           <div>Change</div>
-          <div>$ {paymentChange.toFixed(2)}</div>
+          <div>$ {paymentChange?.toFixed(2)}</div>
         </div>
       </div>
       <div className={styles["counter-submit-button"]}>
@@ -145,7 +149,7 @@ function PosCounter() {
           disabled={
             paymentAmount === 0
               ? true
-              : paymentAmount >= totalPrice
+              : paymentAmount >= totalSellingPrice
               ? false
               : true
           }

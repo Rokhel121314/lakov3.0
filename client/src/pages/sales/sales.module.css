@@ -4,6 +4,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro&family=Playfair+Display:wght@800&display=swap");
 /* font-family: 'Playfair Display', serif; */
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+/* font-family: 'Roboto Mono', monospace; */
+
 body {
   margin: 0;
 }
@@ -12,4 +15,125 @@ body {
   height: 100vh;
   width: 85%;
   float: right;
+  color: black;
+}
+
+/* SALES HEADER CSS */
+
+.header-container {
+  height: 10vh;
+  width: 100%;
+  background: blanchedalmond;
+}
+
+/* SALES CONTENT CSS */
+
+.content-container {
+  height: 90vh;
+  width: 100%;
+}
+
+.summary-container {
+  height: 25vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.summary-content {
+  height: 20vh;
+  width: 23%;
+  box-shadow: 5px 2px 8px rgba(52, 76, 87, 0.8);
+  border-radius: 5px;
+  font-family: "Roboto Mono", monospace;
+}
+
+.summary-description {
+  height: 7vh;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.summary-value {
+  height: 7vh;
+  width: 100%;
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  color: rgb(52, 76, 87);
+}
+
+.graph-stats-container {
+  height: 65vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.graph-container {
+  height: 60vh;
+  width: 70%;
+  background: bisque;
+}
+
+.stats-container {
+  width: 25%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-seller-container {
+  height: 29vh;
+  width: 100%;
+  box-shadow: 5px 2px 8px rgba(52, 76, 87, 0.8);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-seller-header {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  align-self: flex-start;
+}
+
+.top-seller-content {
+  max-height: 20vh;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.view-all {
+  align-self: flex-end;
+  margin-right: 1rem;
+  text-decoration: underline;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.top-seller-value {
+  height: 4vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-seller-container {
+  height: 29vh;
+  width: 100%;
+  box-shadow: 5px 2px 8px rgba(52, 76, 87, 0.8);
+  border-radius: 5px;
 }
