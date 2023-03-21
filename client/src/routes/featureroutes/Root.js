@@ -18,6 +18,7 @@ function Root() {
   useEffect(() => {
     dispatch(readAllProduct(persistUserData.user_id));
     dispatch(readAllTransactions(persistUserData.user_id));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productData, addedTransaction]);
   return (

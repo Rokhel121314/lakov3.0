@@ -50,6 +50,7 @@ export const transactionSlice = createSlice({
     totalTransactionProfit: 0,
     soldItemsList: [],
     salesDataByQuantity: [],
+    salesDataByProfit: [],
     isLoading: true,
   },
   reducers: {
@@ -106,26 +107,34 @@ export const transactionSlice = createSlice({
       );
     },
 
-    // getSalesByProfit: (state, { payload }) => {
-    //   const filteredSoldProduct = payload.map(
-    //     (product) =>
-    //       (state.soldItemsList
-    //         .filter((sold) => {
-    //           return sold._id === product._id;
-    //         })
-    //         .map((prod) => prod.item_quantity)
-    //         .reduce((a, b) => a + b, 0) /
-    //         state.totalTransactionQuantity) *
-    //       100
-    //   );
+    getSalesByProfit: (state, { payload }) => {
+      state.salesDataByProfit = [];
+      const filteredSoldProduct = payload.map(
+        (product) =>
+          (state.soldItemsList
+            .filter((sold) => {
+              return sold._id === product._id;
+            })
+            .map(
+              (prod) =>
+                prod.item_quantity * (prod.selling_price - prod.original_price)
+            )
+            .reduce((a, b) => a + b, 0) /
+            state.totalTransactionAmount) *
+          100
+      );
 
-    //   for (let i = 0; i < filteredSoldProduct.length; i++) {
-    //     state.salesDataByQuantity.push({
-    //       product_name: payload[i].product_name,
-    //       sold_quantity_percentage: parseFloat(filteredSoldProduct[i]),
-    //     });
-    //   }
-    // },
+      for (let i = 0; i < filteredSoldProduct.length; i++) {
+        state.salesDataByProfit.push({
+          product_name: payload[i].product_name,
+          sold_profit_percentage: parseFloat(filteredSoldProduct[i]),
+        });
+      }
+
+      state.salesDataByProfit.sort((a, b) =>
+        a.sold_profit_percentage > b.sold_profit_percentage ? -1 : 1
+      );
+    },
 
     sortBySoldQtyAsc: (state, { payload }) => {
       state.sortedTransaction = state.filteredTransactionList.sort((a, b) =>
@@ -230,5 +239,6 @@ export const {
   filterByDate,
   getAllSoldItems,
   getSalesByQuantity,
+  getSalesByProfit,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

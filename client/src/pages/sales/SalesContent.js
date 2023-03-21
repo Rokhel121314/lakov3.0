@@ -10,6 +10,7 @@ function SalesContent() {
     totalTransactionCost,
     totalTransactionProfit,
     salesDataByQuantity,
+    salesDataByProfit,
   } = useSelector((state) => state.transaction);
 
   const { toCapitalizedFirstWord } = useToUpperCase();
@@ -59,7 +60,9 @@ function SalesContent() {
         <div className={styles["graph-container"]}></div>
         <div className={styles["stats-container"]}>
           <div className={styles["top-seller-container"]}>
-            <div className={styles["top-seller-header"]}>TOP SELLERS</div>
+            <div className={styles["top-seller-header"]}>
+              TOP SELLERS by Sold Quantity
+            </div>
             <div className={styles["top-seller-content"]}>
               {!salesDataByQuantity
                 ? ""
@@ -78,7 +81,29 @@ function SalesContent() {
             </div>
             <div className={styles["view-all"]}>VIEW ALL</div>
           </div>
-          <div className={styles["bottom-seller-container"]}></div>
+
+          <div className={styles["top-seller-container"]}>
+            <div className={styles["top-seller-header"]}>
+              TOP SELLERS by Profit
+            </div>
+            <div className={styles["top-seller-content"]}>
+              {!salesDataByProfit
+                ? ""
+                : salesDataByProfit.slice(0, 5).map((sales, index) => {
+                    return (
+                      <div className={styles["top-seller-value"]} key={index}>
+                        <div>{`${index++ + 1}. ${toCapitalizedFirstWord(
+                          sales.product_name
+                        )}`}</div>
+                        <div>{`${sales.sold_profit_percentage.toFixed(
+                          2
+                        )}% `}</div>
+                      </div>
+                    );
+                  })}
+            </div>
+            <div className={styles["view-all"]}>VIEW ALL</div>
+          </div>
         </div>
       </div>
     </div>

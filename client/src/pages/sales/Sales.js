@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getTransactionTotals,
   getSalesByQuantity,
+  getSalesByProfit,
 } from "../../redux/transactionSlice";
 import styles from "./sales.module.css";
 import SalesContent from "./SalesContent";
@@ -25,6 +26,7 @@ function Sales() {
 
   useEffect(() => {
     dispatch(getSalesByQuantity(allProductData));
+    dispatch(getSalesByProfit(allProductData));
 
     // dispatch(getAllSoldItems());
     // eslint-disable-next-line react-hooks/exhaustive-deps
