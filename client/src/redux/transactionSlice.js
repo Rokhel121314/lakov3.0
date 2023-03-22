@@ -51,9 +51,13 @@ export const transactionSlice = createSlice({
     soldItemsList: [],
     salesDataByQuantity: [],
     salesDataByProfit: [],
+    salesDataByDate: [],
     isLoading: true,
   },
   reducers: {
+    getFilteredTransactionList: (state, { payload }) => {
+      state.filteredTransactionList = state.transactionList;
+    },
     getTransactionDetail: (state, { payload }) => {
       state.transactionDetail = payload;
     },
@@ -133,6 +137,52 @@ export const transactionSlice = createSlice({
 
       state.salesDataByProfit.sort((a, b) =>
         a.sold_profit_percentage > b.sold_profit_percentage ? -1 : 1
+      );
+    },
+
+    getSalesDataByDate: (state, { payload }) => {
+      state.salesDataByDate = [];
+      const salesDataByQuantity = payload.map((date) => {
+        return state.filteredTransactionList
+          .filter(
+            (transaction) =>
+              format(new Date(transaction.createdAt), "MM/dd/yyy") === date
+          )
+          .map((quantity) => quantity.transaction_sold_quantity)
+          .reduce((a, b) => a + b, 0);
+      });
+
+      const salesDataBySoldAmount = payload.map((date) => {
+        return state.filteredTransactionList
+          .filter(
+            (transaction) =>
+              format(new Date(transaction.createdAt), "MM/dd/yyy") === date
+          )
+          .map((amount) => amount.transaction_sold_amount)
+          .reduce((a, b) => a + b, 0);
+      });
+
+      const salesDataByProfit = payload.map((date) => {
+        return state.filteredTransactionList
+          .filter(
+            (transaction) =>
+              format(new Date(transaction.createdAt), "MM/dd/yyy") === date
+          )
+          .map((profit) => profit.transaction_profit_amount)
+          .reduce((a, b) => a + b, 0);
+      });
+
+      for (let i = 0; i < payload.length; i++) {
+        state.salesDataByDate.push({
+          transaction_date: payload[i],
+          sales_total_quantity: parseFloat(salesDataByQuantity[i]),
+          sales_total_amount: parseFloat(salesDataBySoldAmount[i]),
+          sales_total_profit: parseFloat(salesDataByProfit[i]),
+        });
+      }
+
+      state.salesDataByDate.sort((a, b) =>
+        a.transaction_date > b.transaction_date ? -1 : 1
       );
     },
 
@@ -240,5 +290,7 @@ export const {
   getAllSoldItems,
   getSalesByQuantity,
   getSalesByProfit,
+  getSalesDataByDate,
+  getFilteredTransactionList,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

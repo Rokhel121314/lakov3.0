@@ -23,7 +23,27 @@ body {
 .header-container {
   height: 10vh;
   width: 100%;
-  background: blanchedalmond;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sales-header {
+  height: 10vh;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: "Roboto Mono", monospace;
+  color: #344c57;
+}
+
+.date-filter-container {
+  height: 10vh;
+  width: 30%;
+  display: flex;
+  align-items: center;
 }
 
 /* SALES CONTENT CSS */
@@ -64,7 +84,7 @@ body {
   width: 100%;
   margin-left: 1rem;
   font-size: 1.5rem;
-  color: rgb(52, 76, 87);
+  color: #344c57;
 }
 
 .graph-stats-container {
@@ -73,12 +93,30 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  font-family: "Roboto Mono", monospace;
 }
 
 .graph-container {
   height: 60vh;
   width: 70%;
-  background: bisque;
+  box-shadow: 5px 2px 8px rgba(52, 76, 87, 0.8);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* background: bisque; */
+}
+
+.chart-graph {
+  font-family: "Roboto Mono", monospace;
+}
+
+.chart-select {
+  position: absolute;
+  width: 120px;
+  left: calc(100% - 120px - 2rem);
+  top: 0.5rem;
 }
 
 .stats-container {

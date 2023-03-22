@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./sales.module.css";
 import { useSelector } from "react-redux";
 import useToUpperCase from "../../hooks/useToUpperCase";
+import SalesGraph from "./SalesGraph";
 
 function SalesContent() {
   const {
@@ -13,8 +14,9 @@ function SalesContent() {
     salesDataByProfit,
   } = useSelector((state) => state.transaction);
 
+  const [chartSelect, setChartSelect] = useState("quantity");
+
   const { toCapitalizedFirstWord } = useToUpperCase();
-  console.log("salesDataByQuantity", salesDataByQuantity);
 
   return (
     <div className={styles["content-container"]}>
@@ -57,11 +59,20 @@ function SalesContent() {
       </div>
 
       <div className={styles["graph-stats-container"]}>
-        <div className={styles["graph-container"]}></div>
+        <div className={styles["graph-container"]}>
+          <select
+            className={styles["chart-select"]}
+            onChange={(e) => setChartSelect(e.target.value)}>
+            <option value="quantity">SOLD QUANTITY</option>
+            <option value="amount">SOLD AMOUNT</option>
+            <option value="profit">SOLD PROFIT</option>
+          </select>
+          <SalesGraph chartSelect={chartSelect} />
+        </div>
         <div className={styles["stats-container"]}>
           <div className={styles["top-seller-container"]}>
             <div className={styles["top-seller-header"]}>
-              TOP SELLERS by Sold Quantity
+              TOP SELLERS by Quantity
             </div>
             <div className={styles["top-seller-content"]}>
               {!salesDataByQuantity
@@ -71,7 +82,7 @@ function SalesContent() {
                       <div className={styles["top-seller-value"]} key={index}>
                         <div>{`${index++ + 1}. ${toCapitalizedFirstWord(
                           sales.product_name
-                        )}`}</div>
+                        ).slice(0, 14)}`}</div>
                         <div>{`${sales.sold_quantity_percentage.toFixed(
                           2
                         )}% `}</div>
@@ -94,7 +105,7 @@ function SalesContent() {
                       <div className={styles["top-seller-value"]} key={index}>
                         <div>{`${index++ + 1}. ${toCapitalizedFirstWord(
                           sales.product_name
-                        )}`}</div>
+                        ).slice(0, 16)}`}</div>
                         <div>{`${sales.sold_profit_percentage.toFixed(
                           2
                         )}% `}</div>
