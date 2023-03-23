@@ -8,9 +8,12 @@ import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import useToggle from "../../hooks/useToggle";
 import StockDetailUpdate from "./StockDetailUpdate";
 import useClickOutside from "../../hooks/useClickOutSide";
+import StockStats from "./StockStats";
 
 function StockDetail() {
   const { productDetail } = useSelector((state) => state.product);
+
+  const { salesData } = useSelector((state) => state.transaction);
 
   const { newWord } = useCapitalize(productDetail?.product_name);
   const newProductName = newWord;
@@ -86,7 +89,11 @@ function StockDetail() {
         {/* PRODUCT STATISTICS */}
         <div className={styles["stockdetail-statistics"]}>
           {!isOpen ? (
-            "STATISTICS"
+            !salesData ? (
+              ""
+            ) : (
+              <StockStats />
+            )
           ) : (
             <StockDetailUpdate toggleIsOpen={toggleIsOpen} />
           )}

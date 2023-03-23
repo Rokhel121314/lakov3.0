@@ -144,6 +144,7 @@ body {
   align-items: center;
   margin-left: 1rem;
   align-self: flex-start;
+  font-weight: 600;
 }
 
 .top-seller-content {

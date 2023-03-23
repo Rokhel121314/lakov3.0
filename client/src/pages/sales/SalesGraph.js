@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Bar, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
+// eslint-disable-next-line
 import { Chart as ChartJS } from "chart.js/auto";
 import { useSelector } from "react-redux";
 import styles from "./sales.module.css";
