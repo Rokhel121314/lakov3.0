@@ -49,11 +49,15 @@ export const transactionSlice = createSlice({
     totalTransactions: 0,
     totalTransactionProfit: 0,
     soldItemsList: [],
-    salesDataByQuantity: [],
-    salesDataByProfit: [],
+    salesData: [],
+    salesDataByDate: [],
+    perProductSalesDataByDate: [],
     isLoading: true,
   },
   reducers: {
+    getFilteredTransactionList: (state, { payload }) => {
+      state.filteredTransactionList = state.transactionList;
+    },
     getTransactionDetail: (state, { payload }) => {
       state.transactionDetail = payload;
     },
@@ -81,58 +85,155 @@ export const transactionSlice = createSlice({
       state.totalTransactions = state.filteredTransactionList.length;
     },
 
-    getSalesByQuantity: (state, { payload }) => {
-      state.salesDataByQuantity = [];
-      const filteredSoldProduct = payload.map(
-        (product) =>
-          (state.soldItemsList
-            .filter((sold) => {
-              return sold._id === product._id;
-            })
-            .map((prod) => prod.item_quantity)
-            .reduce((a, b) => a + b, 0) /
-            state.totalTransactionQuantity) *
-          100
+    getSalesData: (state, { payload }) => {
+      state.salesData = [];
+      const filteredSoldProductByQty = payload.map((product) =>
+        state.soldItemsList
+          .filter((sold) => {
+            return sold._id === product._id;
+          })
+          .map((prod) => prod.item_quantity)
+          .reduce((a, b) => a + b, 0)
       );
 
-      for (let i = 0; i < filteredSoldProduct.length; i++) {
-        state.salesDataByQuantity.push({
+      const soldProductQtyPercentage = filteredSoldProductByQty.map(
+        (product) => (product / state.totalTransactionQuantity) * 100
+      );
+
+      const filteredSoldProductByAmount = payload.map((product) =>
+        state.soldItemsList
+          .filter((sold) => {
+            return sold._id === product._id;
+          })
+          .map((prod) => prod.item_quantity * prod.selling_price)
+          .reduce((a, b) => a + b, 0)
+      );
+
+      const soldProductAmountPercentage = filteredSoldProductByAmount.map(
+        (product) => (product / state.totalTransactionAmount) * 100
+      );
+
+      const filteredSoldProductByProfit = payload.map((product) =>
+        state.soldItemsList
+          .filter((sold) => {
+            return sold._id === product._id;
+          })
+          .map(
+            (prod) =>
+              prod.item_quantity * (prod.selling_price - prod.original_price)
+          )
+          .reduce((a, b) => a + b, 0)
+      );
+
+      const soldProductProfitPercentage = filteredSoldProductByProfit.map(
+        (product) => (product / state.totalTransactionProfit) * 100
+      );
+
+      for (let i = 0; i < payload.length; i++) {
+        state.salesData.push({
           product_name: payload[i].product_name,
-          sold_quantity_percentage: parseFloat(filteredSoldProduct[i]),
+          product_id: payload[i]._id,
+          sold_quantity_total: parseFloat(filteredSoldProductByQty[i]),
+          sold_quantity_percentage: parseFloat(soldProductQtyPercentage[i]),
+          sold_amount_total: parseFloat(filteredSoldProductByAmount[i]),
+          sold_amount_percentage: parseFloat(soldProductAmountPercentage[i]),
+          sold_profit_total: parseFloat(filteredSoldProductByProfit[i]),
+          sold_profit_percentage: parseFloat(soldProductProfitPercentage[i]),
         });
       }
 
-      state.salesDataByQuantity.sort((a, b) =>
+      state.salesData.sort((a, b) =>
         a.sold_quantity_percentage > b.sold_quantity_percentage ? -1 : 1
       );
     },
 
-    getSalesByProfit: (state, { payload }) => {
-      state.salesDataByProfit = [];
-      const filteredSoldProduct = payload.map(
-        (product) =>
-          (state.soldItemsList
-            .filter((sold) => {
-              return sold._id === product._id;
-            })
-            .map(
-              (prod) =>
-                prod.item_quantity * (prod.selling_price - prod.original_price)
-            )
-            .reduce((a, b) => a + b, 0) /
-            state.totalTransactionAmount) *
-          100
+    getSalesDataByDate: (state, { payload }) => {
+      state.salesDataByDate = [];
+
+      const salesDate = state.filteredTransactionList.map((date) =>
+        format(new Date(date.createdAt), "MM/dd/yyyy")
       );
 
-      for (let i = 0; i < filteredSoldProduct.length; i++) {
-        state.salesDataByProfit.push({
-          product_name: payload[i].product_name,
-          sold_profit_percentage: parseFloat(filteredSoldProduct[i]),
+      const dateFilter = [...new Set(salesDate)];
+
+      const salesDataByQuantity = dateFilter.map((date) => {
+        return state.filteredTransactionList
+          .filter(
+            (transaction) =>
+              format(new Date(transaction.createdAt), "MM/dd/yyy") === date
+          )
+          .map((quantity) => quantity.transaction_sold_quantity)
+          .reduce((a, b) => a + b, 0);
+      });
+
+      const salesDataBySoldAmount = dateFilter.map((date) => {
+        return state.filteredTransactionList
+          .filter(
+            (transaction) =>
+              format(new Date(transaction.createdAt), "MM/dd/yyy") === date
+          )
+          .map((amount) => amount.transaction_sold_amount)
+          .reduce((a, b) => a + b, 0);
+      });
+
+      const salesDataByProfit = dateFilter.map((date) => {
+        return state.filteredTransactionList
+          .filter(
+            (transaction) =>
+              format(new Date(transaction.createdAt), "MM/dd/yyy") === date
+          )
+          .map((profit) => profit.transaction_profit_amount)
+          .reduce((a, b) => a + b, 0);
+      });
+
+      for (let i = 0; i < dateFilter.length; i++) {
+        state.salesDataByDate.push({
+          transaction_date: dateFilter[i],
+          sales_total_quantity: parseFloat(salesDataByQuantity[i]),
+          sales_total_amount: parseFloat(salesDataBySoldAmount[i]),
+          sales_total_profit: parseFloat(salesDataByProfit[i]),
         });
       }
 
-      state.salesDataByProfit.sort((a, b) =>
-        a.sold_profit_percentage > b.sold_profit_percentage ? -1 : 1
+      state.salesDataByDate.sort((a, b) =>
+        a.transaction_date > b.transaction_date ? 1 : -1
+      );
+    },
+
+    getSalesDataByDateOfProduct: (state, { payload }) => {
+      state.perProductSalesDataByDate = [];
+
+      const salesDate = state.filteredTransactionList.map((date) =>
+        format(new Date(date.createdAt), "MM/dd/yyyy")
+      );
+
+      const dateFilter = [...new Set(salesDate)];
+
+      const data = dateFilter.map((date) => {
+        return state.filteredTransactionList.filter(
+          (transaction) =>
+            format(new Date(transaction.createdAt), "MM/dd/yyyy") === date
+        );
+      });
+
+      const perProductSalesData = data.map((transaction) =>
+        transaction
+          .map((product) =>
+            product.transaction_sold_items.filter((x) => x._id === payload._id)
+          )
+          .map((p) => p.map((q) => q.item_quantity).reduce((a, b) => a + b, 0))
+          .reduce((a, b) => a + b, 0)
+      );
+
+      for (let i = 0; i < dateFilter.length; i++) {
+        state.perProductSalesDataByDate.push({
+          transaction_date: dateFilter[i],
+          sales_total_quantity: parseFloat(perProductSalesData[i]),
+        });
+      }
+
+      state.perProductSalesDataByDate.sort((a, b) =>
+        a.transaction_date > b.transaction_date ? 1 : -1
       );
     },
 
@@ -238,7 +339,9 @@ export const {
   searchFilter,
   filterByDate,
   getAllSoldItems,
-  getSalesByQuantity,
-  getSalesByProfit,
+  getSalesDataByDate,
+  getSalesData,
+  getFilteredTransactionList,
+  getSalesDataByDateOfProduct,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

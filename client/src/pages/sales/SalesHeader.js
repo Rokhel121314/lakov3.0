@@ -5,7 +5,10 @@ import DateRangeTest from "../transactions/DateRangeTest";
 function SalesHeader() {
   return (
     <div className={styles["header-container"]}>
-      <DateRangeTest />
+      <div className={styles["sales-header"]}>LAKO SALES DATA</div>
+      <div className={styles["date-filter-container"]}>
+        <DateRangeTest />
+      </div>
     </div>
   );
 }

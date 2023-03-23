@@ -165,6 +165,7 @@ export const productSlice = createSlice({
       .addCase(readAllProduct.fulfilled, (state, { payload }) => {
         state.allProductData = payload;
         state.filteredProductData = payload;
+        state.productDetail = payload[0];
         state.isLoading = false;
       })
       .addCase(readAllProduct.rejected, (state, { payload }) => {

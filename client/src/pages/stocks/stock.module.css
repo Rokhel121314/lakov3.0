@@ -211,10 +211,80 @@ body {
   font-family: "Roboto Mono", monospace;
   text-align: start;
 }
+
+/* STOCK DETAIL STATISTICS CSS */
+
 .stockdetail-statistics {
   height: 32vh;
   width: 100%;
   /* background: rgb(251, 225, 225); */
+}
+
+.statistics-container {
+  height: 32vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stats-header {
+  width: 40%;
+  height: 32vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stats-subcontainer {
+  width: 100%;
+  margin-left: 4rem;
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+}
+
+.stats-desc {
+  width: 100%;
+  font-size: 0.7rem;
+
+  font-family: "Roboto Mono", monospace;
+}
+
+.stats-content {
+  font-size: 1rem;
+  color: black;
+  width: 100%;
+  font-weight: 600;
+  font-family: "Roboto Mono", monospace;
+}
+
+.stats-content > button {
+  font-size: 0.7rem;
+  color: white;
+  border: 1px solid rgb(52, 76, 87);
+  background: #344c57;
+  border-radius: 0.6rem;
+}
+
+.stats-graph {
+  width: 60%;
+  height: 32vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  /* background: gray; */
+}
+
+.graph-container {
+  height: 15vh;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 12vh;
 }
 
 /* STOCK DETAIL UPDATE CSS */

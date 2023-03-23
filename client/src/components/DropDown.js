@@ -34,7 +34,7 @@ function DropDown({ persistUserData, handleLogout }) {
             <RiUserSettingsLine className={styles["dropdown-icon"]} />
             <div className={styles["dropdown-text"]}>My Account</div>
           </NavLink>
-          <NavLink className={styles["dropdown-list"]} to={"/lako/stocks"}>
+          <NavLink className={styles["dropdown-list"]} to={"/lako/sales"}>
             <IoStorefrontOutline className={styles["dropdown-icon"]} />
             <div className={styles["dropdown-text"]}>My Lako</div>
           </NavLink>

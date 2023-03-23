@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./sales.module.css";
 import { useSelector } from "react-redux";
 import useToUpperCase from "../../hooks/useToUpperCase";
+import SalesGraph from "./SalesGraph";
 
 function SalesContent() {
   const {
@@ -9,12 +10,24 @@ function SalesContent() {
     totalTransactionAmount,
     totalTransactionCost,
     totalTransactionProfit,
-    salesDataByQuantity,
-    salesDataByProfit,
+    salesData,
   } = useSelector((state) => state.transaction);
 
+  const [chartSelect, setChartSelect] = useState("quantity");
+
   const { toCapitalizedFirstWord } = useToUpperCase();
-  console.log("salesDataByQuantity", salesDataByQuantity);
+
+  const salesDataSortedByQty = salesData
+    .slice()
+    .sort((a, b) =>
+      a.sold_quantity_percentage > b.sold_quantity_percentage ? -1 : 1
+    );
+
+  const salesDataSortedBySales = salesData
+    .slice()
+    .sort((a, b) =>
+      a.sold_profit_percentage > b.sold_amount_percentage ? -1 : 1
+    );
 
   return (
     <div className={styles["content-container"]}>
@@ -57,21 +70,30 @@ function SalesContent() {
       </div>
 
       <div className={styles["graph-stats-container"]}>
-        <div className={styles["graph-container"]}></div>
+        <div className={styles["graph-container"]}>
+          <select
+            className={styles["chart-select"]}
+            onChange={(e) => setChartSelect(e.target.value)}>
+            <option value="quantity">SOLD QUANTITY</option>
+            <option value="amount">SOLD AMOUNT</option>
+            <option value="profit">SOLD PROFIT</option>
+          </select>
+          <SalesGraph chartSelect={chartSelect} />
+        </div>
         <div className={styles["stats-container"]}>
           <div className={styles["top-seller-container"]}>
             <div className={styles["top-seller-header"]}>
-              TOP SELLERS by Sold Quantity
+              TOP SELLERS by Quantity
             </div>
             <div className={styles["top-seller-content"]}>
-              {!salesDataByQuantity
+              {!salesDataSortedByQty
                 ? ""
-                : salesDataByQuantity.slice(0, 5).map((sales, index) => {
+                : salesDataSortedByQty.slice(0, 5).map((sales, index) => {
                     return (
                       <div className={styles["top-seller-value"]} key={index}>
                         <div>{`${index++ + 1}. ${toCapitalizedFirstWord(
                           sales.product_name
-                        )}`}</div>
+                        ).slice(0, 14)}`}</div>
                         <div>{`${sales.sold_quantity_percentage.toFixed(
                           2
                         )}% `}</div>
@@ -84,18 +106,18 @@ function SalesContent() {
 
           <div className={styles["top-seller-container"]}>
             <div className={styles["top-seller-header"]}>
-              TOP SELLERS by Profit
+              TOP SELLERS by Gross Sales
             </div>
             <div className={styles["top-seller-content"]}>
-              {!salesDataByProfit
+              {!salesDataSortedBySales
                 ? ""
-                : salesDataByProfit.slice(0, 5).map((sales, index) => {
+                : salesDataSortedBySales.slice(0, 5).map((sales, index) => {
                     return (
                       <div className={styles["top-seller-value"]} key={index}>
                         <div>{`${index++ + 1}. ${toCapitalizedFirstWord(
                           sales.product_name
-                        )}`}</div>
-                        <div>{`${sales.sold_profit_percentage.toFixed(
+                        ).slice(0, 16)}`}</div>
+                        <div>{`${sales.sold_amount_percentage.toFixed(
                           2
                         )}% `}</div>
                       </div>
