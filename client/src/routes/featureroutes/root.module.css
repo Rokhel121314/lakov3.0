@@ -12,7 +12,7 @@ body {
 .root-container {
   height: 100vh;
   width: 15%;
-  background: rgba(0, 0, 0, 1);
+  background: rgb(52, 76, 87);
   color: white;
   position: fixed;
   font-family: "Kantumruy Pro", sans-serif;
@@ -20,33 +20,36 @@ body {
 
 .brand-container {
   width: 100%;
-  height: 15vh;
+  height: 35vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.brand-logo {
+  width: 90%;
+  height: auto;
 }
 
 .brand-name {
-  font-family: "Playfair Display", serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 800;
-  margin-left: 1rem;
-  margin-bottom: 0.3rem;
 }
 
 .sub-name {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   font-weight: 600;
-  margin-left: 1rem;
   color: rgb(208, 208, 208);
 }
 
 .nav-list {
-  height: 70vh;
+  height: 50vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .nav-link-active {
@@ -55,12 +58,14 @@ body {
   text-decoration: none;
   display: flex;
   align-items: center;
-  /* padding-left: 2rem; */
-  border-bottom: 1px solid gray;
+  padding-left: 1rem;
+  border-radius: 10px;
+  background: none;
+  border: 2px solid rgb(125, 161, 179);
 }
 
 .nav-link {
-  height: calc(5vh);
+  height: calc(7vh);
   width: 80%;
   text-decoration: none;
   display: flex;
@@ -68,7 +73,90 @@ body {
 }
 
 .nav-item {
+  font-size: 0.9rem;
   color: white;
   display: flex;
   justify-content: flex-start;
+}
+
+.nav-item-name {
+  margin-left: 1rem;
+}
+
+.nav-footer {
+  height: 15vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.user-logout {
+  width: 90%;
+  height: 5vh;
+  background: none;
+  border: 2px solid rgb(125, 161, 179);
+  position: absolute;
+  border-radius: 10px;
+  top: 1vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+}
+
+.user-logout-hide {
+  display: none;
+}
+
+.logout-icon {
+  font-size: 1rem;
+  margin-left: 2rem;
+}
+.border-top {
+  width: 90%;
+  border-top: 3px solid gray;
+}
+
+.user-footer {
+  height: 5vh;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.user-icon {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.user-name {
+  margin-left: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.user-button {
+  background: none;
+  border: none;
+  color: aliceblue;
+  font-size: 1.5rem;
+  height: 5vh;
+  width: 1rem;
+}
+
+.drop-icon {
+  font-size: 2rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.drop-icon-rotate {
+  font-size: 2rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  transform: rotate(180deg);
 }

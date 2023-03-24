@@ -26,7 +26,7 @@ function SalesContent() {
   const salesDataSortedBySales = salesData
     .slice()
     .sort((a, b) =>
-      a.sold_profit_percentage > b.sold_amount_percentage ? -1 : 1
+      a.sold_amount_percentage > b.sold_amount_percentage ? -1 : 1
     );
 
   return (
@@ -101,7 +101,7 @@ function SalesContent() {
                     );
                   })}
             </div>
-            <div className={styles["view-all"]}>VIEW ALL</div>
+            {/* <div className={styles["view-all"]}>VIEW ALL</div> */}
           </div>
 
           <div className={styles["top-seller-container"]}>
@@ -124,7 +124,7 @@ function SalesContent() {
                     );
                   })}
             </div>
-            <div className={styles["view-all"]}>VIEW ALL</div>
+            {/* <div className={styles["view-all"]}>VIEW ALL</div> */}
           </div>
         </div>
       </div>

@@ -66,7 +66,7 @@ function PosCounter() {
       </div>
       <div className={styles["counter-body"]}>
         {!counterItems.length ? (
-          <div>"NO PRODUCT ON COUNTER"</div>
+          <div></div>
         ) : (
           counterItems?.map((product) => {
             return (

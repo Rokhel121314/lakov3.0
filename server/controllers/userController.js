@@ -55,10 +55,11 @@ const userLogin = async (req, res) => {
           sameSite: "strict",
         });
 
-        res.json({
+        res.status(200).json({
           user_id: user._id,
           first_name: user.first_name,
           store_name: user.store_name,
+          store_logo: user.store_logo,
         });
       }
     }

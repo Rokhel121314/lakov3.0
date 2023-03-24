@@ -15,6 +15,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "add a store name"],
     },
+    store_logo: {
+      type: String,
+      required: [false, "add a store logo"],
+    },
     user_name: {
       type: String,
       required: [true, "add a user name"],
