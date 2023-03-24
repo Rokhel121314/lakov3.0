@@ -32,8 +32,6 @@ const StockStats = () => {
     ],
   };
 
-  console.log("chartData", perProductSalesDataByDate);
-
   return (
     <div className={styles["statistics-container"]}>
       <div className={styles["stats-header"]}>
