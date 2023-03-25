@@ -36,11 +36,16 @@ function Root() {
     <>
       <div className={styles["root-container"]}>
         <div className={styles["brand-container"]}>
-          <img
-            className={styles["brand-logo"]}
-            src={persistUserData.store_logo}
-            alt="logo"
-          />
+          {!persistUserData.store_logo ? (
+            ""
+          ) : (
+            <img
+              className={styles["brand-logo"]}
+              src={persistUserData.store_logo}
+              alt="logo"
+            />
+          )}
+
           <div className={styles["brand-name"]}>
             {persistUserData.store_name.toUpperCase()}
           </div>
