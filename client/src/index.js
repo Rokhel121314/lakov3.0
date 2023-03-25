@@ -8,13 +8,15 @@ import Stock from "./pages/stocks/Stock";
 import Pos from "./pages/pos/Pos";
 import Transaction from "./pages/transactions/Transaction";
 import Sales from "./pages/sales/Sales";
-import Layout from "./routes/landingroutes/Layout";
 import Register from "./pages/user/Register";
 import Login from "./pages/user/Login";
 import Feature from "./pages/landingpage/Feature";
-import HowToUse from "./pages/landingpage/HowToUse";
 import store from "./store";
 import { Provider } from "react-redux";
+import Layout from "./routes/landingroutes/Layout copy";
+import ContactUs from "./pages/landingpage/ContactUs";
+import AboutUs from "./pages/landingpage/AboutUs";
+
 const router = createBrowserRouter([
   {
     path: "/lako",
@@ -53,8 +55,12 @@ const router = createBrowserRouter([
         element: <Feature />,
       },
       {
-        path: "/howtouse",
-        element: <HowToUse />,
+        path: "/about",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
       },
     ],
   },

@@ -1,23 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+/* font-family: 'Inter', sans-serif; */
+
 body {
   margin: 0;
+  font-family: "Inter", sans-serif;
 }
 
 .home-container {
-  min-height: 100vh;
+  height: 90.5vh;
   width: 100%;
-  background-image: url("../../assests/images/backgroundimageoption3.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+  display: flex;
 }
 
-.feature-container {
-  min-height: 100vh;
-  width: 100%;
-
-  /* background-color: aquamarine; */
+.slogan-container {
+  height: 90.5vh;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.howtouse-container {
-  min-height: 100vh;
+.slogan {
+  height: 20vh;
+  width: 90%;
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: black;
+  letter-spacing: 2px;
+  /* text-shadow: 2px 2px 5px rgba(128, 128, 128, 0.5); */
+}
+
+.sub-text {
+  height: 20vh;
+  width: 90%;
+  font-size: 1.5rem;
+  color: #334c57;
+  letter-spacing: 2px;
+}
+
+.signup-button {
+  height: 20vh;
+  width: 90%;
+  color: #334c57;
+}
+
+.signup-link {
+  text-decoration: none;
+  color: white;
+  background: #334c57;
+  font-size: 1.5rem;
+  padding: 0.7rem 4rem;
+  border-radius: 1.2rem;
+}
+
+.landing-image-container {
+  height: 90.5vh;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.landing-image {
   width: 100%;
+}
+
+.under-shadow {
+  width: 90%;
+  height: 25vh;
+  border-radius: 50%;
+  background: rgba(222, 229, 238, 0.6);
+  position: absolute;
+  z-index: -10;
+  bottom: 7vh;
 }
