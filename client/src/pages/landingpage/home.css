@@ -7,6 +7,16 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+@keyframes slide-in-from-top {
+  from {
+    transform: translateY(-80%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+/* HOME PAGE CSS ---------------HOME PAGE CSS------------------HOME PAGE CSS */
 .home-container {
   height: 90.5vh;
   width: 100%;
@@ -23,27 +33,34 @@ body {
 }
 
 .slogan {
-  height: 20vh;
+  min-height: 20vh;
   width: 90%;
   font-size: 3.5rem;
   font-weight: 600;
   color: black;
   letter-spacing: 2px;
-  /* text-shadow: 2px 2px 5px rgba(128, 128, 128, 0.5); */
+  animation: slide-in-from-top 500ms;
 }
 
 .sub-text {
-  height: 20vh;
+  min-height: 20vh;
   width: 90%;
   font-size: 1.5rem;
   color: #334c57;
   letter-spacing: 2px;
+  animation: slide-in-from-top 500ms;
 }
 
 .signup-button {
   height: 20vh;
   width: 90%;
   color: #334c57;
+  display: block;
+  animation: slide-in-from-top 500ms;
+}
+
+.signin-button {
+  display: none;
 }
 
 .signup-link {
@@ -65,6 +82,7 @@ body {
 
 .landing-image {
   width: 100%;
+  animation: slide-in-from-top 1000ms;
 }
 
 .under-shadow {
@@ -75,4 +93,86 @@ body {
   position: absolute;
   z-index: -10;
   bottom: 7vh;
+  animation: slide-in-from-top 250ms;
 }
+
+@media (max-width: 768px) {
+  .home-container {
+    height: 85vh;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .landing-image-container {
+    width: 100%;
+    height: 40.5vh;
+    /* background: red; */
+  }
+
+  .landing-image {
+    animation: slide-in-from-top 1250ms;
+  }
+
+  .under-shadow {
+    width: 90%;
+    height: 12vh;
+    border-radius: 50%;
+    background: rgba(222, 229, 238, 0.6);
+    position: absolute;
+    z-index: -10;
+    left: calc(10% / 2);
+    top: 28vh;
+    animation: slide-in-from-top 1000ms;
+  }
+
+  .slogan-container {
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .slogan {
+    min-height: 13vh;
+    width: 90%;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: black;
+    letter-spacing: 2px;
+    animation: slide-in-from-top 750ms;
+  }
+
+  .sub-text {
+    min-height: 15vh;
+    width: 90%;
+    font-size: 1rem;
+    color: #334c57;
+    text-align: center;
+    letter-spacing: 2px;
+    animation: slide-in-from-top 500ms;
+  }
+
+  .signup-button {
+    display: none;
+  }
+
+  .signin-button {
+    height: 10vh;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    color: #334c57;
+    animation: slide-in-from-top 250ms;
+  }
+
+  .signup-link {
+    text-align: center;
+  }
+}
+
+/* FEATURE PAGE CSS----------------FEATURE PAGE CSS-----------FEATURE PAGE CSS- */

@@ -49,7 +49,9 @@ function Root() {
           <div className={styles["brand-name"]}>
             {persistUserData.store_name.toUpperCase()}
           </div>
-          <div className={styles["sub-name"]}>POWERED BY LAKO</div>
+          <NavLink className={styles["sub-name"]} to={"/"}>
+            POWERED BY LAKO
+          </NavLink>
         </div>
         <nav className={styles["nav-list"]}>
           <NavLink
