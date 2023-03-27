@@ -17,6 +17,15 @@ body {
   }
 }
 
+@keyframes slide-in-from-top10 {
+  from {
+    transform: translateY(-10%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
 @keyframes slide-in-from-left {
   from {
     transform: translateX(-80%);
@@ -65,13 +74,79 @@ body {
   text-decoration: none;
   letter-spacing: 2px;
   color: #334c57;
+  cursor: pointer;
 }
 
 .signin-button {
   background: #334c57;
   color: white;
-  padding: 0.6rem 1.6rem;
+  padding: 0.6rem 1rem;
   border-radius: 1.4rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.drop-icon {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 3rem;
+  right: -0rem;
+  border: 2px solid #334c57;
+  width: 220px;
+  min-height: 100px;
+  border-radius: 1rem;
+  color: #334c57;
+  background: #dee5ee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: slide-in-from-top10 250ms;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.menu-items {
+  height: 2rem;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.menu-items:hover {
+  text-decoration: underline;
+}
+
+.menu-header {
+  color: #334c57;
+  width: 90%;
+  padding: 0.3rem 0rem;
+  border-radius: 0.8rem 0.8rem 0rem 0rem;
+}
+
+.menu-spacer {
+  display: flex;
+  align-items: center;
+  height: 1rem;
+  border-bottom: 1px solid #334c57;
+}
+
+.store-icon {
+  width: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.menu-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .sm-navbar-container,

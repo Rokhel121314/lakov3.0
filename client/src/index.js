@@ -13,7 +13,7 @@ import Login from "./pages/user/Login";
 import Feature from "./pages/landingpage/Feature";
 import store from "./store";
 import { Provider } from "react-redux";
-import Layout from "./routes/landingroutes/Layout copy";
+import Layout from "./routes/landingroutes/Layout";
 import ContactUs from "./pages/landingpage/ContactUs";
 import AboutUs from "./pages/landingpage/AboutUs";
 

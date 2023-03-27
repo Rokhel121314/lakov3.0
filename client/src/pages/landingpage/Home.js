@@ -9,7 +9,7 @@ function Home() {
 
   return (
     <>
-      <div className="home-container">
+      <div className="home-container" id="home">
         <div className="slogan-container">
           <div className="slogan">
             WE MAKE <br /> BUSINESS EASY!
